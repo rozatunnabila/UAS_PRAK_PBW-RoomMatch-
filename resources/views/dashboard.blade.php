@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>RoomMatch Dashboard</title>
+<title>RoomMatch Dashboard</title>
 
 <style>
 
@@ -16,17 +16,19 @@
 }
 
 body{
-    font-family: Arial, sans-serif;
+    font-family:Arial, sans-serif;
     background:#0B1120;
 }
 
 /* Navbar */
+
 .navbar{
 
     width:100%;
     height:90px;
 
     background:#0F172A;
+
     border-bottom:1px solid #1E293B;
 
     padding:0 60px;
@@ -37,15 +39,18 @@ body{
 
     position:sticky;
     top:0;
+
     z-index:999;
 }
 
 /* Left */
+
 .left-navbar{
     width:20%;
 }
 
 /* Center */
+
 .center-navbar{
 
     width:60%;
@@ -55,6 +60,7 @@ body{
 }
 
 /* Right */
+
 .right-navbar{
 
     width:20%;
@@ -64,8 +70,11 @@ body{
 }
 
 /* Logo */
+
 .logo{
+
     color:white;
+
     font-size:34px;
     font-weight:bold;
 }
@@ -75,10 +84,11 @@ body{
 }
 
 /* Username */
+
 .username{
 
-    color:white;
     background:#162033;
+    color:white;
 
     padding:12px 20px;
 
@@ -88,9 +98,12 @@ body{
 }
 
 /* Menu */
+
 .menu{
+
     display:flex;
     align-items:center;
+
     gap:45px;
 }
 
@@ -99,6 +112,7 @@ body{
     text-decoration:none;
 
     color:#CBD5E1;
+
     font-weight:500;
 
     position:relative;
@@ -110,7 +124,6 @@ body{
     color:white;
 }
 
-/* Hover Line */
 .menu a::after{
 
     content:'';
@@ -132,7 +145,6 @@ body{
     width:100%;
 }
 
-/* Active */
 .menu .active{
     color:#C8A96B;
 }
@@ -142,11 +154,13 @@ body{
 }
 
 /* Content */
+
 .content{
     padding:50px 60px;
 }
 
 /* Header */
+
 .header{
 
     display:flex;
@@ -157,37 +171,51 @@ body{
 }
 
 /* Header Left */
+
 .header-left h2{
 
     color:white;
+
     font-size:54px;
 
     margin-bottom:10px;
 }
 
 .header-left p{
+
     color:#94A3B8;
+
     font-size:18px;
 }
 
 /* Search */
+
 .search-box{
 
-    width:400px;
+    width:420px;
+
+    display:flex;
+    align-items:center;
+
+    background:#162033;
+
+    border:1px solid #23314F;
+
+    border-radius:18px;
+
+    overflow:hidden;
 }
 
 .search-box input{
 
     width:100%;
 
-    background:#162033;
-    border:1px solid #23314F;
+    background:none;
+    border:none;
 
     color:white;
 
     padding:18px 22px;
-
-    border-radius:18px;
 
     outline:none;
 
@@ -198,22 +226,53 @@ body{
     color:#94A3B8;
 }
 
+/* Search Button */
+
+.search-btn{
+
+    width:65px;
+    height:58px;
+
+    background:transparent;
+
+    color:#94A3B8;
+
+    border:none;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:0.3s;
+}
+
+.search-btn:hover{
+    color:white;
+}
+
 /* Cards */
+
 .card-container{
 
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
 
     gap:30px;
 }
 
 /* Card */
+
 .card{
 
     background:#162033;
+
     border:1px solid #23314F;
 
     border-radius:28px;
+
     overflow:hidden;
 
     transition:0.3s;
@@ -222,10 +281,12 @@ body{
 .card:hover{
 
     transform:translateY(-8px);
+
     box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* Profile Image */
+/* Image */
+
 .profile-image{
 
     width:100%;
@@ -235,29 +296,35 @@ body{
 }
 
 /* Card Content */
+
 .card-content{
     padding:25px;
 }
 
 /* Name */
+
 .card-content h3{
 
     color:white;
+
     font-size:28px;
 
     margin-bottom:8px;
 }
 
-/* Gender Age */
+/* Gender */
+
 .gender-age{
 
     color:#C8A96B;
+
     font-size:15px;
 
     margin-bottom:22px;
 }
 
-/* Info List */
+/* Info */
+
 .info-list{
 
     display:flex;
@@ -271,10 +338,12 @@ body{
 .info-list p{
 
     color:#CBD5E1;
+
     font-size:15px;
 }
 
 /* Budget */
+
 .budget small{
     color:#94A3B8;
 }
@@ -282,12 +351,14 @@ body{
 .budget h4{
 
     color:#C8A96B;
+
     font-size:24px;
 
     margin-top:6px;
 }
 
-/* Chat Button */
+/* Button */
+
 .match-btn{
 
     width:100%;
@@ -298,6 +369,7 @@ body{
     color:#0F172A;
 
     border:none;
+
     border-radius:16px;
 
     padding:16px;
@@ -319,10 +391,12 @@ body{
 .match-btn:hover{
 
     background:#b89255;
+
     transform:scale(1.02);
 }
 
-/* Floating Add Button */
+/* Floating Button */
+
 .add-btn{
 
     position:fixed;
@@ -357,10 +431,25 @@ body{
 .add-btn:hover{
 
     transform:scale(1.1);
+
     background:#b89255;
 }
 
+/* Empty */
+
+.empty{
+
+    background:#162033;
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:20px;
+}
+
 /* Responsive */
+
 @media(max-width:992px){
 
     .card-container{
@@ -374,9 +463,11 @@ body{
     .navbar{
 
         height:auto;
+
         padding:20px;
 
         flex-direction:column;
+
         gap:20px;
     }
 
@@ -385,12 +476,14 @@ body{
     .right-navbar{
 
         width:100%;
+
         justify-content:center;
     }
 
     .header{
 
         flex-direction:column;
+
         align-items:flex-start;
 
         gap:25px;
@@ -420,10 +513,8 @@ body{
 
 <body>
 
-<!-- Navbar -->
 <nav class="navbar">
 
-    <!-- Left -->
     <div class="left-navbar">
 
         <h1 class="logo">
@@ -432,7 +523,6 @@ body{
 
     </div>
 
-    <!-- Center -->
     <div class="center-navbar">
 
         <div class="menu">
@@ -453,7 +543,6 @@ body{
 
     </div>
 
-    <!-- Right -->
     <div class="right-navbar">
 
         <div class="username">
@@ -464,13 +553,10 @@ body{
 
 </nav>
 
-<!-- Content -->
 <div class="content">
 
-    <!-- Header -->
     <div class="header">
 
-        <!-- Left -->
         <div class="header-left">
 
             <h2>
@@ -483,250 +569,98 @@ body{
 
         </div>
 
-        <!-- Right Search -->
-        <div class="search-box">
+        <form action="/dashboard" method="GET" class="search-box">
 
             <input
                 type="text"
-                placeholder="Cari roommate, lokasi, kebiasaan...">
+                name="search"
+                placeholder="Cari roommate, lokasi, kebiasaan..."
+                value="{{ request('search') }}">
 
-        </div>
+            <button type="submit" class="search-btn">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24">
+
+                    <circle cx="11" cy="11" r="8"></circle>
+
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+
+                </svg>
+
+            </button>
+
+        </form>
 
     </div>
 
-    <!-- Cards -->
     <div class="card-container">
 
-        <!-- CARD 1 -->
-        <div class="card">
+        @forelse($filteredRoommates as $roommate)
 
-            <img
-                src="https://picsum.photos/500/400?random=1"
-                class="profile-image">
+            <div class="card">
 
-            <div class="card-content">
+                <img
+                    src="{{ $roommate['image'] }}"
+                    class="profile-image">
 
-                <h3>
-                    Aulia Putri
-                </h3>
+                <div class="card-content">
 
-                <p class="gender-age">
-                    Perempuan • 21 Tahun
-                </p>
+                    <h3>
+                        {{ $roommate['name'] }}
+                    </h3>
 
-                <div class="info-list">
+                    <p class="gender-age">
+                        {{ $roommate['gender'] }}
+                    </p>
 
-                    <p>📍 Banda Aceh</p>
-                    <p>🎓 Mahasiswa</p>
-                    <p>🛏 Cari 1 roommate</p>
-                    <p>💤 Tidur cepat</p>
-                    <p>🧹 Suka bersih</p>
+                    <div class="info-list">
+
+                        <p>{{ $roommate['lokasi'] }}</p>
+                        <p>{{ $roommate['status'] }}</p>
+                        <p>{{ $roommate['roommate'] }}</p>
+                        <p>{{ $roommate['habit1'] }}</p>
+                        <p>{{ $roommate['habit2'] }}</p>
+
+                    </div>
+
+                    <div class="budget">
+
+                        <small>
+                            Budget
+                        </small>
+
+                        <h4>
+                            {{ $roommate['budget'] }}
+                        </h4>
+
+                    </div>
+
+                    <a href="/chat" class="match-btn">
+                        Chat
+                    </a>
 
                 </div>
-
-                <div class="budget">
-
-                    <small>Budget</small>
-
-                    <h4>
-                        Rp 800rb - 1,2jt
-                    </h4>
-
-                </div>
-
-                <a href="/chat" class="match-btn">
-                    Chat
-                </a>
 
             </div>
 
-        </div>
+        @empty
 
-        <!-- CARD 2 -->
-        <div class="card">
-
-            <img
-                src="https://picsum.photos/500/400?random=2"
-                class="profile-image">
-
-            <div class="card-content">
-
-                <h3>
-                    Rizky Maulana
-                </h3>
-
-                <p class="gender-age">
-                    Laki-laki • 23 Tahun
-                </p>
-
-                <div class="info-list">
-
-                    <p>📍 Lhokseumawe</p>
-                    <p>💼 Freelancer</p>
-                    <p>🛏 Cari 2 roommate</p>
-                    <p>🌙 Night Owl</p>
-                    <p>🎮 Suka gaming</p>
-
-                </div>
-
-                <div class="budget">
-
-                    <small>Budget</small>
-
-                    <h4>
-                        Rp 1jt - 1,5jt
-                    </h4>
-
-                </div>
-
-                <a href="/chat" class="match-btn">
-                    Chat
-                </a>
-
+            <div class="empty">
+                Roommate tidak ditemukan.
             </div>
 
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="card">
-
-            <img
-                src="https://picsum.photos/500/400?random=3"
-                class="profile-image">
-
-            <div class="card-content">
-
-                <h3>
-                    Salsabila
-                </h3>
-
-                <p class="gender-age">
-                    Perempuan • 20 Tahun
-                </p>
-
-                <div class="info-list">
-
-                    <p>📍 Medan</p>
-                    <p>🎓 Mahasiswa</p>
-                    <p>🛏 Cari 1 roommate</p>
-                    <p>☀️ Bangun pagi</p>
-                    <p>📚 Suka belajar</p>
-
-                </div>
-
-                <div class="budget">
-
-                    <small>Budget</small>
-
-                    <h4>
-                        Rp 900rb - 1,3jt
-                    </h4>
-
-                </div>
-
-                <a href="/chat" class="match-btn">
-                    Chat
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="card">
-
-            <img
-                src="https://picsum.photos/500/400?random=4"
-                class="profile-image">
-
-            <div class="card-content">
-
-                <h3>
-                    Fadhlan
-                </h3>
-
-                <p class="gender-age">
-                    Laki-laki • 24 Tahun
-                </p>
-
-                <div class="info-list">
-
-                    <p>📍 Banda Aceh</p>
-                    <p>💼 Programmer</p>
-                    <p>🛏 Cari 1 roommate</p>
-                    <p>☕ Suka ngopi</p>
-                    <p>🎵 Suka musik</p>
-
-                </div>
-
-                <div class="budget">
-
-                    <small>Budget</small>
-
-                    <h4>
-                        Rp 1,2jt - 1,8jt
-                    </h4>
-
-                </div>
-
-                <a href="/chat" class="match-btn">
-                    Chat
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- CARD 5 -->
-        <div class="card">
-
-            <img
-                src="https://picsum.photos/500/400?random=5"
-                class="profile-image">
-
-            <div class="card-content">
-
-                <h3>
-                    Nadia Safira
-                </h3>
-
-                <p class="gender-age">
-                    Perempuan • 22 Tahun
-                </p>
-
-                <div class="info-list">
-
-                    <p>📍 Langsa</p>
-                    <p>🎓 Mahasiswa</p>
-                    <p>🛏 Cari 2 roommate</p>
-                    <p>🧹 Suka bersih</p>
-                    <p>🍜 Suka masak</p>
-
-                </div>
-
-                <div class="budget">
-
-                    <small>Budget</small>
-
-                    <h4>
-                        Rp 700rb - 1jt
-                    </h4>
-
-                </div>
-
-                <a href="/chat" class="match-btn">
-                    Chat
-                </a>
-
-            </div>
-
-        </div>
+        @endforelse
 
     </div>
 
 </div>
 
-<!-- Floating Add Button -->
 <a href="/iklan/create" class="add-btn">
     +
 </a>
