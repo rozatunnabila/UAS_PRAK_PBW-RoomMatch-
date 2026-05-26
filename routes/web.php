@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Iklan;
 
 Route::get('/', function () {
-    return view('welcome');
+    $Iklan=Iklan::where('status', 'active')->get();
+    return view('welcome', compact('iklans'));
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $Iklan=Iklan::where('status', 'active')->get();
+    return view('dashboard', compact('iklans'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
