@@ -7,24 +7,23 @@
             <div class="text-center mb-10">
 
                 <div class="flex justify-center mb-5">
-                    <div class="w-16 h-16 rounded-2xl border border-[#C8A96B] flex items-center justify-center">
+    <div class="w-16 h-16 rounded-2xl border border-[#C8A96B] flex items-center justify-center">
 
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-8 h-8 text-[#C8A96B]"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-8 h-8 text-[#C8A96B]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
 
-                            <path stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M18 9v6m3-3h-6m-6 8a7 7 0 100-14 7 7 0 000 14z" />
+            <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.7"
+                d="M2.25 12L12 4.5 21.75 12M4.5 10.5V20.25H19.5V10.5" />
 
-                        </svg>
+        </svg>
 
-                    </div>
-                </div>
-
+    </div>
+</div>
                 <h1 class="text-4xl font-bold text-white">
                     Create Account
                 </h1>
