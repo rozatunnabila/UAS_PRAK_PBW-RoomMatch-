@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Iklan;
 
 class DashboardController extends Controller
 {
@@ -10,52 +11,25 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
-        $roommates = session()->get('roommates', [
+        $search = $request->search;
 
-            [
-                'name' => 'Aulia Putri',
-                'gender' => 'Perempuan',
-                'umur' => '21 Tahun',
-                'lokasi' => 'Banda Aceh',
-                'status' => 'Mahasiswa',
-                'roommate' => 'Cari 1 roommate',
-                'habit1' => 'Tidur cepat',
-                'habit2' => 'Suka bersih',
-                'budget' => 'Rp 800rb - 1,2jt',
-                'image' => 'https://picsum.photos/500/400?random=1'
-            ],
+        $filteredRoommates = Iklan::where('status', 'active')
 
-            [
-                'name' => 'Rizky Maulana',
-                'gender' => 'Laki-laki',
-                'umur' => '23 Tahun',
-                'lokasi' => 'Lhokseumawe',
-                'status' => 'Freelancer',
-                'roommate' => 'Cari 2 roommate',
-                'habit1' => 'Night Owl',
-                'habit2' => 'Suka gaming',
-                'budget' => 'Rp 1jt - 1,5jt',
-                'image' => 'https://picsum.photos/500/400?random=2'
-            ],
+            ->when($search, function ($query) use ($search) {
 
-        ]);
+                $query->where(function ($q) use ($search) {
 
-        $search = strtolower($request->search);
+                    $q->where('judul', 'like', "%{$search}%")
+                      ->orWhere('lokasi', 'like', "%{$search}%")
+                      ->orWhere('pekerjaan', 'like', "%{$search}%")
+                      ->orWhere('habit1', 'like', "%{$search}%")
+                      ->orWhere('habit2', 'like', "%{$search}%");
 
-        $filteredRoommates = array_filter($roommates, function ($roommate) use ($search) {
+                });
 
-            if (!$search) {
-                return true;
-            }
+            })
 
-            return
-                str_contains(strtolower($roommate['name']), $search) ||
-                str_contains(strtolower($roommate['lokasi']), $search) ||
-                str_contains(strtolower($roommate['status']), $search) ||
-                str_contains(strtolower($roommate['habit1']), $search) ||
-                str_contains(strtolower($roommate['habit2']), $search);
-
-        });
+            ->get();
 
         return view('dashboard', compact('filteredRoommates'));
 
@@ -69,9 +43,7 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
 
-        $roommates = session()->get('roommates', []);
-
-        $image = 'https://picsum.photos/500/400?random=' . rand(1,999);
+        $gambar = null;
 
         if($request->hasFile('image')){
 
@@ -81,26 +53,26 @@ class DashboardController extends Controller
 
             $file->move(public_path('uploads'), $filename);
 
-            $image = asset('uploads/' . $filename);
+            $gambar = 'uploads/' . $filename;
 
         }
 
-        $roommates[] = [
+        Iklan::create([
 
-            'name' => $request->name,
+            'judul' => $request->name,
+            'lokasi' => $request->lokasi,
+            'harga' => $request->budget,
+            'gambar' => $gambar,
+            'status' => 'active',
+
             'gender' => $request->gender,
             'umur' => $request->umur,
-            'lokasi' => $request->lokasi,
-            'status' => $request->status,
+            'pekerjaan' => $request->status,
             'roommate' => $request->roommate,
             'habit1' => $request->habit1,
-            'habit2' => $request->habit2,
-            'budget' => $request->budget,
-            'image' => $image
+            'habit2' => $request->habit2
 
-        ];
-
-        session()->put('roommates', $roommates);
+        ]);
 
         return redirect('/dashboard');
 

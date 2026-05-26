@@ -6,11 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Iklan extends Model
 {
+
     protected $fillable = [
+
         'judul',
         'lokasi',
         'harga',
         'gambar',
-        'status'
+        'status',
+
+        'gender',
+        'umur',
+        'pekerjaan',
+        'roommate',
+        'habit1',
+        'habit2'
+
     ];
+
 }

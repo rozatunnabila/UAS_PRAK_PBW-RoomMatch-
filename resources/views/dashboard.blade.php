@@ -606,26 +606,40 @@ body{
             <div class="card">
 
                 <img
-                    src="{{ $roommate['image'] }}"
+                    src="{{ asset($roommate->gambar) }}"
                     class="profile-image">
 
                 <div class="card-content">
 
                     <h3>
-                        {{ $roommate['name'] }}
+                        {{ $roommate->judul }}
                     </h3>
 
                     <p class="gender-age">
-                        {{ $roommate['gender'] }}
+                        {{ $roommate->gender }} • {{ $roommate->umur }}
                     </p>
 
                     <div class="info-list">
 
-                        <p>{{ $roommate['lokasi'] }}</p>
-                        <p>{{ $roommate['status'] }}</p>
-                        <p>{{ $roommate['roommate'] }}</p>
-                        <p>{{ $roommate['habit1'] }}</p>
-                        <p>{{ $roommate['habit2'] }}</p>
+                        <p>
+                            📍 {{ $roommate->lokasi }}
+                        </p>
+
+                        <p>
+                            🎓 {{ $roommate->pekerjaan }}
+                        </p>
+
+                        <p>
+                            🛏 {{ $roommate->roommate }}
+                        </p>
+
+                        <p>
+                            ✨ {{ $roommate->habit1 }}
+                        </p>
+
+                        <p>
+                            ✨ {{ $roommate->habit2 }}
+                        </p>
 
                     </div>
 
@@ -636,7 +650,7 @@ body{
                         </small>
 
                         <h4>
-                            {{ $roommate['budget'] }}
+                            {{ $roommate->harga }}
                         </h4>
 
                     </div>
