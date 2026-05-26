@@ -10,69 +10,35 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
-        $roommates = [
+        $roommates = session()->get('roommates', [
 
             [
                 'name' => 'Aulia Putri',
-                'gender' => 'Perempuan • 21 Tahun',
-                'lokasi' => '📍 Banda Aceh',
-                'status' => '🎓 Mahasiswa',
-                'roommate' => '🛏 Cari 1 roommate',
-                'habit1' => '💤 Tidur cepat',
-                'habit2' => '🧹 Suka bersih',
+                'gender' => 'Perempuan',
+                'umur' => '21 Tahun',
+                'lokasi' => 'Banda Aceh',
+                'status' => 'Mahasiswa',
+                'roommate' => 'Cari 1 roommate',
+                'habit1' => 'Tidur cepat',
+                'habit2' => 'Suka bersih',
                 'budget' => 'Rp 800rb - 1,2jt',
                 'image' => 'https://picsum.photos/500/400?random=1'
             ],
 
             [
                 'name' => 'Rizky Maulana',
-                'gender' => 'Laki-laki • 23 Tahun',
-                'lokasi' => '📍 Lhokseumawe',
-                'status' => '💼 Freelancer',
-                'roommate' => '🛏 Cari 2 roommate',
-                'habit1' => '🌙 Night Owl',
-                'habit2' => '🎮 Suka gaming',
+                'gender' => 'Laki-laki',
+                'umur' => '23 Tahun',
+                'lokasi' => 'Lhokseumawe',
+                'status' => 'Freelancer',
+                'roommate' => 'Cari 2 roommate',
+                'habit1' => 'Night Owl',
+                'habit2' => 'Suka gaming',
                 'budget' => 'Rp 1jt - 1,5jt',
                 'image' => 'https://picsum.photos/500/400?random=2'
             ],
 
-            [
-                'name' => 'Salsabila',
-                'gender' => 'Perempuan • 20 Tahun',
-                'lokasi' => '📍 Medan',
-                'status' => '🎓 Mahasiswa',
-                'roommate' => '🛏 Cari 1 roommate',
-                'habit1' => '☀️ Bangun pagi',
-                'habit2' => '📚 Suka belajar',
-                'budget' => 'Rp 900rb - 1,3jt',
-                'image' => 'https://picsum.photos/500/400?random=3'
-            ],
-
-            [
-                'name' => 'Fadhlan',
-                'gender' => 'Laki-laki • 24 Tahun',
-                'lokasi' => '📍 Banda Aceh',
-                'status' => '💼 Programmer',
-                'roommate' => '🛏 Cari 1 roommate',
-                'habit1' => '☕ Suka ngopi',
-                'habit2' => '🎵 Suka musik',
-                'budget' => 'Rp 1,2jt - 1,8jt',
-                'image' => 'https://picsum.photos/500/400?random=4'
-            ],
-
-            [
-                'name' => 'Nadia Safira',
-                'gender' => 'Perempuan • 22 Tahun',
-                'lokasi' => '📍 Langsa',
-                'status' => '🎓 Mahasiswa',
-                'roommate' => '🛏 Cari 2 roommate',
-                'habit1' => '🧹 Suka bersih',
-                'habit2' => '🍜 Suka masak',
-                'budget' => 'Rp 700rb - 1jt',
-                'image' => 'https://picsum.photos/500/400?random=5'
-            ],
-
-        ];
+        ]);
 
         $search = strtolower($request->search);
 
@@ -92,6 +58,51 @@ class DashboardController extends Controller
         });
 
         return view('dashboard', compact('filteredRoommates'));
+
+    }
+
+    public function create()
+    {
+        return view('create-roommate');
+    }
+
+    public function store(Request $request)
+    {
+
+        $roommates = session()->get('roommates', []);
+
+        $image = 'https://picsum.photos/500/400?random=' . rand(1,999);
+
+        if($request->hasFile('image')){
+
+            $file = $request->file('image');
+
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+
+            $file->move(public_path('uploads'), $filename);
+
+            $image = asset('uploads/' . $filename);
+
+        }
+
+        $roommates[] = [
+
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'umur' => $request->umur,
+            'lokasi' => $request->lokasi,
+            'status' => $request->status,
+            'roommate' => $request->roommate,
+            'habit1' => $request->habit1,
+            'habit2' => $request->habit2,
+            'budget' => $request->budget,
+            'image' => $image
+
+        ];
+
+        session()->put('roommates', $roommates);
+
+        return redirect('/dashboard');
 
     }
 

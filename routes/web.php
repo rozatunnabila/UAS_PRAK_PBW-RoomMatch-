@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,14 @@ use App\Http\Controllers\DashboardController;
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('/roommate/create', [DashboardController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('roommate.create');
+
+Route::post('/roommate/store', [DashboardController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('roommate.store');
 
 Route::middleware('auth')->group(function () {
 
