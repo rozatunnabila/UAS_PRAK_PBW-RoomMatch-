@@ -17,7 +17,7 @@
 
 body{
 
-    background:#0B1120;
+    background:#081120;
 
     font-family:Arial,sans-serif;
 
@@ -55,12 +55,25 @@ body{
 
 .logo{
 
-    padding:30px;
+    padding:28px 30px;
 
     font-size:32px;
     font-weight:bold;
 
     border-bottom:1px solid #1E293B;
+
+    text-decoration:none;
+
+    color:white;
+
+    display:block;
+
+    transition:0.3s;
+}
+
+.logo:hover{
+
+    background:#111C31;
 }
 
 .logo span{
@@ -82,13 +95,15 @@ body{
 
     border:none;
 
-    border-radius:14px;
+    border-radius:16px;
 
     padding:16px;
 
     color:white;
 
     outline:none;
+
+    font-size:14px;
 }
 
 .search input::placeholder{
@@ -131,6 +146,8 @@ body{
 .chat-item:hover{
 
     background:#162033;
+
+    transform:translateX(3px);
 }
 
 .chat-item.active{
@@ -150,6 +167,8 @@ body{
     border-radius:50%;
 
     object-fit:cover;
+
+    border:2px solid #1E293B;
 }
 
 /* Chat Info */
@@ -185,11 +204,68 @@ body{
     flex-direction:column;
 }
 
+/* TOP LEFT */
+
+.top-left{
+
+    display:flex;
+    align-items:center;
+
+    gap:20px;
+}
+
+/* BACK BUTTON */
+
+.back-btn{
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    color:#C8A96B;
+
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:500;
+
+    padding:8px 14px;
+
+    border-radius:10px;
+
+    transition:0.25s ease;
+
+    background:transparent;
+}
+
+/* HOVER */
+
+.back-btn:hover{
+
+    background:rgba(200,169,107,0.12);
+
+    color:#F5D08A;
+
+    transform:translateX(-2px);
+}
+
+/* ICON */
+
+.back-btn svg{
+
+    transition:0.25s ease;
+}
+
+.back-btn:hover svg{
+
+    transform:translateX(-3px);
+}
+
 /* Top Bar */
 
 .top-bar{
 
-    height:90px;
+    min-height:90px;
 
     background:#0F172A;
 
@@ -220,10 +296,15 @@ body{
     border-radius:50%;
 
     object-fit:cover;
+
+    border:2px solid #23314F;
 }
 
 .chat-user h3{
+
     margin-bottom:5px;
+
+    font-size:26px;
 }
 
 .chat-user p{
@@ -243,15 +324,17 @@ body{
 
     border:none;
 
-    padding:14px 25px;
+    padding:14px 28px;
 
-    border-radius:14px;
+    border-radius:16px;
 
     font-weight:bold;
 
     cursor:pointer;
 
     transition:0.3s;
+
+    font-size:15px;
 }
 
 .match-btn:hover{
@@ -285,9 +368,11 @@ body{
 
     padding:16px 18px;
 
-    border-radius:18px;
+    border-radius:20px;
 
     line-height:1.5;
+
+    font-size:15px;
 }
 
 /* Sender */
@@ -330,6 +415,8 @@ body{
     gap:15px;
 }
 
+/* Input */
+
 .chat-input input{
 
     flex:1;
@@ -338,7 +425,7 @@ body{
 
     border:none;
 
-    border-radius:16px;
+    border-radius:18px;
 
     padding:18px;
 
@@ -349,6 +436,8 @@ body{
     font-size:15px;
 }
 
+/* Send Button */
+
 .send-btn{
 
     width:60px;
@@ -356,7 +445,7 @@ body{
 
     border:none;
 
-    border-radius:16px;
+    border-radius:18px;
 
     background:#C8A96B;
 
@@ -376,6 +465,20 @@ body{
     background:#b89255;
 
     transform:scale(1.05);
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:6px;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#23314F;
+
+    border-radius:20px;
 }
 
 /* Responsive */
@@ -400,9 +503,11 @@ body{
 
     <div class="sidebar">
 
-        <div class="logo">
+        <a href="/dashboard" class="logo">
+
             Room<span>Match</span>
-        </div>
+
+        </a>
 
         <div class="search">
 
@@ -448,27 +553,57 @@ body{
 
     <div class="main-chat">
 
-        <!-- Top -->
+        <!-- TOP BAR -->
 
         <div class="top-bar">
 
-            <div class="chat-user">
+            <div class="top-left">
 
-                <img src="{{ asset($receiver->gambar) }}">
+                <!-- BUTTON KEMBALI -->
 
-                <div>
+                <a href="/dashboard" class="back-btn">
 
-                    <h3>
-                        {{ $receiver->judul }}
-                    </h3>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24">
 
-                    <p>
-                        Active now
-                    </p>
+                        <path d="M19 12H5"></path>
+
+                        <path d="M12 19l-7-7 7-7"></path>
+
+                    </svg>
+
+                    Kembali
+
+                </a>
+
+                <!-- USER -->
+
+                <div class="chat-user">
+
+                    <img src="{{ asset($receiver->gambar) }}">
+
+                    <div>
+
+                        <h3>
+                            {{ $receiver->judul }}
+                        </h3>
+
+                        <p>
+                            Active now
+                        </p>
+
+                    </div>
 
                 </div>
 
             </div>
+
+            <!-- MATCH BUTTON -->
 
             <button class="match-btn">
                 Match
