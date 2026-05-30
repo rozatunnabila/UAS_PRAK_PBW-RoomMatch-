@@ -15,8 +15,10 @@ class ChatController extends Controller
     public function index($id)
     {
 
+
         $receiver = Iklan::findOrFail($id);
 
+    
         $messages = Chat::where(function($query) use ($id){
 
             $query->where('sender_id', Auth::id())
@@ -35,10 +37,20 @@ class ChatController extends Controller
 
         ->get();
 
-        return view('chat', compact('receiver', 'messages'));
+        $contacts = Iklan::where('id', '!=', $id)->get();
+
+
+        return view('chat', compact(
+
+            'receiver',
+            'messages',
+            'contacts'
+
+        ));
 
     }
 
+    
     public function send(Request $request, $id)
     {
 

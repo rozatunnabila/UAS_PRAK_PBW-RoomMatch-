@@ -124,6 +124,8 @@ body{
     transition:0.3s;
 
     margin-bottom:10px;
+
+    text-decoration:none;
 }
 
 .chat-item:hover{
@@ -162,6 +164,8 @@ body{
     margin-bottom:6px;
 
     font-size:17px;
+
+    color:white;
 }
 
 .chat-info p{
@@ -410,65 +414,31 @@ body{
 
         <div class="chat-list">
 
-            <div class="chat-item active">
+            @foreach($contacts as $contact)
 
-                <img
-                    src="https://picsum.photos/200?1"
-                    class="avatar">
+                <a
+                    href="/chat/{{ $contact->id }}"
+                    class="chat-item {{ $receiver->id == $contact->id ? 'active' : '' }}">
 
-                <div class="chat-info">
+                    <img
+                        src="{{ asset($contact->gambar) }}"
+                        class="avatar">
 
-                    <h4>
-                        Aulia Putri
-                    </h4>
+                    <div class="chat-info">
 
-                    <p>
-                        Lagi cari kos dekat kampus
-                    </p>
+                        <h4>
+                            {{ $contact->judul }}
+                        </h4>
 
-                </div>
+                        <p>
+                            {{ $contact->lokasi }}
+                        </p>
 
-            </div>
+                    </div>
 
-            <div class="chat-item">
+                </a>
 
-                <img
-                    src="https://picsum.photos/200?2"
-                    class="avatar">
-
-                <div class="chat-info">
-
-                    <h4>
-                        Rizky Maulana
-                    </h4>
-
-                    <p>
-                        Suka gaming & begadang
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="chat-item">
-
-                <img
-                    src="https://picsum.photos/200?3"
-                    class="avatar">
-
-                <div class="chat-info">
-
-                    <h4>
-                        Nadia Safira
-                    </h4>
-
-                    <p>
-                        Cari roommate cewek
-                    </p>
-
-                </div>
-
-            </div>
+            @endforeach
 
         </div>
 
@@ -484,16 +454,16 @@ body{
 
             <div class="chat-user">
 
-                <img src="https://picsum.photos/200?1">
+                <img src="{{ asset($receiver->gambar) }}">
 
                 <div>
 
                     <h3>
-                        Aulia Putri
+                        {{ $receiver->judul }}
                     </h3>
 
                     <p>
-                        Online
+                        Active now
                     </p>
 
                 </div>
@@ -510,31 +480,32 @@ body{
 
         <div class="chat-body">
 
-            <div class="message receiver">
-                Haiii, kamu masih cari roommate?
-            </div>
+            @foreach($messages as $message)
 
-            <div class="message sender">
-                Iyaaa, aku cari dekat kampus Unsyiah 😭
-            </div>
+                <div class="message {{ $message->sender_id == Auth::id() ? 'sender' : 'receiver' }}">
 
-            <div class="message receiver">
-                Samaaa 😭 budget kamu berapa?
-            </div>
+                    {{ $message->message }}
 
-            <div class="message sender">
-                Sekitar 1 jutaan sih
-            </div>
+                </div>
+
+            @endforeach
 
         </div>
 
         <!-- Input -->
 
-        <div class="chat-input">
+        <form
+            action="/chat/send/{{ $receiver->id }}"
+            method="POST"
+            class="chat-input">
+
+            @csrf
 
             <input
                 type="text"
-                placeholder="Ketik pesan...">
+                name="message"
+                placeholder="Ketik pesan..."
+                required>
 
             <button class="send-btn">
 
@@ -554,7 +525,7 @@ body{
 
             </button>
 
-        </div>
+        </form>
 
     </div>
 
