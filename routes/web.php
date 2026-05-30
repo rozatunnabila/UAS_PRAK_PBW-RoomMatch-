@@ -12,6 +12,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::get('/roommate/create', [DashboardController::class, 'create']);
 
 Route::post('/roommate/store', [DashboardController::class, 'store']);
+Route::get('/chat/{id}', function ($id) {
+
+    return view('chat');
+
+});
 
 Route::middleware('auth')->group(function () {
 

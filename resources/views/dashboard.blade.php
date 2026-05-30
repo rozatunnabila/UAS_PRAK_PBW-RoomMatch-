@@ -655,7 +655,7 @@ body{
 
                     </div>
 
-                    <a href="/chat" class="match-btn">
+                    <a href="/chat/{{ $roommate->id }}" class="match-btn">
                         Chat
                     </a>
 
