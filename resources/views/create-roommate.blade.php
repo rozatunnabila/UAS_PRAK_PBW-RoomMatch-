@@ -143,7 +143,15 @@ button:hover{
                 Nama
             </label>
 
-            <input type="text" name="name" required>
+            <input
+    type="text"
+    name="name"
+    value="{{ Auth::user()->name }}"
+    readonly
+    style="
+        background:#1E293B;
+        cursor:not-allowed;
+    ">
 
         </div>
 
