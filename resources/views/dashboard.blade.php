@@ -83,6 +83,38 @@ body{
     color:#C8A96B;
 }
 
+/* MATCH NOTIFICATION */
+
+.match-notif{
+
+    background:#C8A96B;
+
+    color:#0F172A;
+
+    padding:10px 14px;
+
+    border-radius:14px;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    transition:0.3s;
+
+    margin-right:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.match-notif:hover{
+
+    transform:translateY(-2px);
+
+    background:#E0BC76;
+}
+
 /* Username */
 
 .username{
@@ -531,9 +563,40 @@ body{
                 Dashboard
             </a>
 
-            <a href="/chat">
-                Chat
-            </a>
+            <a href="/chat-list" style="position:relative;">
+
+    Chat
+
+    @if($chatNotif > 0)
+
+        <span style="
+            position:absolute;
+            top:-10px;
+            right:-18px;
+
+            background:#EF4444;
+            color:white;
+
+            width:22px;
+            height:22px;
+
+            border-radius:50%;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            font-size:12px;
+            font-weight:bold;
+        ">
+
+            {{ $chatNotif }}
+
+        </span>
+
+    @endif
+
+</a>
 
             <a href="/profile">
                 Profile
@@ -545,11 +608,22 @@ body{
 
     <div class="right-navbar">
 
-        <div class="username">
-            {{ Auth::user()->name }}
-        </div>
+   @if($matchRequests->count() > 0)
+
+        <a href="/chat/{{ $matchUser->id }}" class="match-notif">
+
+           🔔 {{ $matchRequests->count() }}
+        </a>
+
+    @endif
+
+    <div class="username">
+
+        {{ Auth::user()->name }}
 
     </div>
+
+</div>
 
 </nav>
 
@@ -655,9 +729,15 @@ body{
 
                     </div>
 
+                    @if($roommate->user_id != Auth::id())
+
                     <a href="/chat/{{ $roommate->id }}" class="match-btn">
+
                         Chat
+
                     </a>
+
+                    @endif
 
                 </div>
 

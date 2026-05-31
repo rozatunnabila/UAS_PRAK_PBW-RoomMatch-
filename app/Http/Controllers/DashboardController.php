@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Iklan;
+use App\Models\RoomMatch;
+use App\Models\Chat;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +22,19 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
+        /*
+        |--------------------------------------------------------------------------
+        | SEARCH
+        |--------------------------------------------------------------------------
+        */
+
         $search = $request->search;
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATA ROOMMATE
+        |--------------------------------------------------------------------------
+        */
 
         $filteredRoommates = Iklan::where('status', 'active')
 
@@ -28,20 +43,111 @@ class DashboardController extends Controller
                 $query->where(function ($q) use ($search) {
 
                     $q->where('judul', 'like', "%{$search}%")
+
                       ->orWhere('lokasi', 'like', "%{$search}%")
+
                       ->orWhere('pekerjaan', 'like', "%{$search}%")
+
                       ->orWhere('habit1', 'like', "%{$search}%")
+
                       ->orWhere('habit2', 'like', "%{$search}%");
 
                 });
 
             })
 
+            ->orderByRaw("user_id = ? DESC", [Auth::id()])
+
             ->latest()
 
             ->get();
 
-        return view('dashboard', compact('filteredRoommates'));
+        /*
+        |--------------------------------------------------------------------------
+        | MATCH REQUEST NOTIFICATION
+        |--------------------------------------------------------------------------
+        */
+
+       /*
+|--------------------------------------------------------------------------
+| MATCH REQUEST NOTIFICATION
+|--------------------------------------------------------------------------
+*/
+/*
+|--------------------------------------------------------------------------
+| CHAT NOTIFICATION
+|--------------------------------------------------------------------------
+*/
+
+$chatNotif = Chat::where(
+
+        'receiver_id',
+        Auth::id()
+
+    )
+
+    ->where(
+
+        'is_read',
+        false
+
+    )
+
+    ->count();
+/*
+|--------------------------------------------------------------------------
+| MATCH REQUEST NOTIFICATION
+|--------------------------------------------------------------------------
+*/
+
+$matchRequests = RoomMatch::where(
+
+        'receiver_id',
+        Auth::id()
+
+    )
+
+    ->where('status', 'pending')
+
+    ->latest()
+
+    ->get();
+
+/*
+|--------------------------------------------------------------------------
+| AMBIL IKLAN PENGIRIM MATCH
+|--------------------------------------------------------------------------
+*/
+
+$matchUser = null;
+
+if($matchRequests->count() > 0){
+
+    $matchUser = Iklan::where(
+
+            'user_id',
+            $matchRequests->first()->sender_id
+
+        )
+
+        ->first();
+
+}
+
+        /*
+        |--------------------------------------------------------------------------
+        | RETURN VIEW
+        |--------------------------------------------------------------------------
+        */
+
+        return view('dashboard', compact(
+
+    'filteredRoommates',
+    'matchRequests',
+    'matchUser',
+    'chatNotif'
+
+));
 
     }
 

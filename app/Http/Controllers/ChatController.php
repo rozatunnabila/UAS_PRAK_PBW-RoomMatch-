@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Chat;
 use App\Models\Iklan;
+use App\Models\RoomMatch;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -31,45 +33,208 @@ class ChatController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | AMBIL USER PEMILIK IKLAN
+        | USER TUJUAN
         |--------------------------------------------------------------------------
         */
 
         $receiverUserId = $receiver->user_id;
 
         /*
+|--------------------------------------------------------------------------
+| READ CHAT
+|--------------------------------------------------------------------------
+*/
+
+Chat::where(
+
+        'sender_id',
+        $receiverUserId
+
+    )
+
+    ->where(
+
+        'receiver_id',
+        Auth::id()
+
+    )
+
+    ->update([
+
+        'is_read' => true
+
+    ]);
+
+        /*
         |--------------------------------------------------------------------------
-        | AMBIL SEMUA PESAN
+        | AMBIL SEMUA CHAT
         |--------------------------------------------------------------------------
         */
 
         $messages = Chat::where(function($query) use ($receiverUserId){
 
-            $query->where('sender_id', Auth::id())
-                  ->where('receiver_id', $receiverUserId);
+                $query->where('sender_id', Auth::id())
+                      ->where('receiver_id', $receiverUserId);
 
-        })
+            })
 
-        ->orWhere(function($query) use ($receiverUserId){
+            ->orWhere(function($query) use ($receiverUserId){
 
-            $query->where('sender_id', $receiverUserId)
-                  ->where('receiver_id', Auth::id());
+                $query->where('sender_id', $receiverUserId)
+                      ->where('receiver_id', Auth::id());
 
-        })
+            })
 
-        ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'asc')
 
-        ->get();
+            ->get();
 
         /*
         |--------------------------------------------------------------------------
-        | CONTACT SIDEBAR
+        | CONTACT SIDEBAR DARI CHAT
         |--------------------------------------------------------------------------
         */
 
-        $contacts = Iklan::where('user_id', '!=', Auth::id())
+        $chatUsers = Chat::where('sender_id', Auth::id())
+
+            ->orWhere('receiver_id', Auth::id())
+
             ->latest()
+
             ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL USER UNIK
+        |--------------------------------------------------------------------------
+        */
+
+        $userIds = [];
+
+        foreach($chatUsers as $chat){
+
+            if($chat->sender_id != Auth::id()){
+
+                $userIds[] = $chat->sender_id;
+
+            }
+
+            if($chat->receiver_id != Auth::id()){
+
+                $userIds[] = $chat->receiver_id;
+
+            }
+
+        }
+
+        $userIds = array_unique($userIds);
+
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL IKLAN USER
+        |--------------------------------------------------------------------------
+        */
+
+       $contacts = Chat::where('sender_id', Auth::id())
+
+    ->orWhere('receiver_id', Auth::id())
+
+    ->latest()
+
+    ->get()
+
+    ->map(function($chat){
+
+        if($chat->sender_id == Auth::id()){
+
+            return $chat->receiver_id;
+
+        }
+
+        return $chat->sender_id;
+
+    })
+
+    ->unique()
+
+    ->values();
+
+    /*
+|--------------------------------------------------------------------------
+| AMBIL DATA USER CONTACT
+|--------------------------------------------------------------------------
+*/
+
+$contacts = User::whereIn(
+
+        'id',
+        $contacts
+
+    )
+
+    ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | CEK PENDING MATCH
+        |--------------------------------------------------------------------------
+        */
+
+        $pendingMatch = RoomMatch::where(
+
+                'receiver_id',
+                Auth::id()
+
+            )
+
+            ->where('sender_id', $receiver->user_id)
+
+            ->where('status', 'pending')
+
+            ->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | MATCH REQUEST MASUK
+        |--------------------------------------------------------------------------
+        */
+
+        $matchRequests = RoomMatch::where(
+
+                'receiver_id',
+                Auth::id()
+
+            )
+
+            ->where('status', 'pending')
+
+            ->latest()
+
+            ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | CEK STATUS MATCH
+        |--------------------------------------------------------------------------
+        */
+
+        $currentMatch = RoomMatch::where(function($query) use ($receiver){
+
+                $query->where('sender_id', Auth::id())
+                      ->where('receiver_id', $receiver->user_id);
+
+            })
+
+            ->orWhere(function($query) use ($receiver){
+
+                $query->where('sender_id', $receiver->user_id)
+                      ->where('receiver_id', Auth::id());
+
+            })
+
+            ->latest()
+
+            ->first();
 
         /*
         |--------------------------------------------------------------------------
@@ -81,7 +246,10 @@ class ChatController extends Controller
 
             'receiver',
             'messages',
-            'contacts'
+            'contacts',
+            'pendingMatch',
+            'matchRequests',
+            'currentMatch'
 
         ));
 
@@ -98,6 +266,18 @@ class ChatController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | VALIDASI
+        |--------------------------------------------------------------------------
+        */
+
+        $request->validate([
+
+            'message' => 'required'
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
         | AMBIL IKLAN TUJUAN
         |--------------------------------------------------------------------------
         */
@@ -106,7 +286,7 @@ class ChatController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | SIMPAN PESAN
+        | SIMPAN CHAT
         |--------------------------------------------------------------------------
         */
 
@@ -122,12 +302,312 @@ class ChatController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | KEMBALI KE CHAT
+        | REDIRECT
         |--------------------------------------------------------------------------
         */
 
         return back();
 
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | MATCH ROOMMATE
+    |--------------------------------------------------------------------------
+    */
+
+    public function match($id)
+    {
+
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL IKLAN TUJUAN
+        |--------------------------------------------------------------------------
+        */
+
+        $receiver = Iklan::findOrFail($id);
+
+        /*
+        |--------------------------------------------------------------------------
+        | CEK APAKAH SUDAH MATCH
+        |--------------------------------------------------------------------------
+        */
+
+        $check = RoomMatch::where('sender_id', Auth::id())
+
+            ->where('receiver_id', $receiver->user_id)
+
+            ->whereIn('status', [
+
+                'pending',
+                'accepted'
+
+            ])
+
+            ->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | JIKA BELUM ADA MATCH
+        |--------------------------------------------------------------------------
+        */
+
+        if(!$check){
+
+            RoomMatch::create([
+
+                'sender_id' => Auth::id(),
+
+                'receiver_id' => $receiver->user_id,
+
+                'status' => 'pending'
+
+            ]);
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | REDIRECT
+        |--------------------------------------------------------------------------
+        */
+
+        return back();
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ACCEPT MATCH
+    |--------------------------------------------------------------------------
+    */
+
+    public function acceptMatch($id)
+    {
+
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL DATA MATCH
+        |--------------------------------------------------------------------------
+        */
+
+        $match = RoomMatch::findOrFail($id);
+
+        /*
+        |--------------------------------------------------------------------------
+        | UPDATE STATUS
+        |--------------------------------------------------------------------------
+        */
+
+        $match->status = 'accepted';
+
+        $match->save();
+
+        /*
+        |--------------------------------------------------------------------------
+        | IKLAN RECEIVER
+        |--------------------------------------------------------------------------
+        */
+
+        $receiverIklan = Iklan::where(
+
+                'user_id',
+                $match->receiver_id
+
+            )
+
+            ->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | IKLAN SENDER
+        |--------------------------------------------------------------------------
+        */
+
+        $senderIklan = Iklan::where(
+
+                'user_id',
+                $match->sender_id
+
+            )
+
+            ->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | KURANGI SLOT RECEIVER
+        |--------------------------------------------------------------------------
+        */
+
+        if($receiverIklan){
+
+            $receiverIklan->roommate = $receiverIklan->roommate - 1;
+
+            if($receiverIklan->roommate <= 0){
+
+                $receiverIklan->status = 'inactive';
+
+            }
+
+            $receiverIklan->save();
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | KURANGI SLOT SENDER
+        |--------------------------------------------------------------------------
+        */
+
+        if($senderIklan){
+
+            $senderIklan->roommate = $senderIklan->roommate - 1;
+
+            if($senderIklan->roommate <= 0){
+
+                $senderIklan->status = 'inactive';
+
+            }
+
+            $senderIklan->save();
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | REDIRECT
+        |--------------------------------------------------------------------------
+        */
+
+        return back();
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | REJECT MATCH
+    |--------------------------------------------------------------------------
+    */
+
+    public function rejectMatch($id)
+    {
+
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL DATA MATCH
+        |--------------------------------------------------------------------------
+        */
+
+        $match = RoomMatch::findOrFail($id);
+
+        /*
+        |--------------------------------------------------------------------------
+        | UPDATE STATUS
+        |--------------------------------------------------------------------------
+        */
+
+        $match->status = 'rejected';
+
+        $match->save();
+
+        /*
+        |--------------------------------------------------------------------------
+        | REDIRECT
+        |--------------------------------------------------------------------------
+        */
+
+        return back();
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHAT LIST
+    |--------------------------------------------------------------------------
+    */
+
+public function chatList()
+{
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL SEMUA CHAT USER LOGIN
+    |--------------------------------------------------------------------------
+    */
+
+    $chatUsers = Chat::where('sender_id', Auth::id())
+
+        ->orWhere('receiver_id', Auth::id())
+
+        ->latest()
+
+        ->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | JIKA BELUM ADA CHAT
+    |--------------------------------------------------------------------------
+    */
+
+    if($chatUsers->count() == 0){
+
+        return view('empty-chat');
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL USER PERTAMA
+    |--------------------------------------------------------------------------
+    */
+
+    $firstChat = $chatUsers->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | TENTUKAN LAWAN CHAT
+    |--------------------------------------------------------------------------
+    */
+
+    if($firstChat->sender_id == Auth::id()){
+
+        $targetUserId = $firstChat->receiver_id;
+
+    }else{
+
+        $targetUserId = $firstChat->sender_id;
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL IKLAN USER
+    |--------------------------------------------------------------------------
+    */
+
+    $iklan = Iklan::where(
+
+            'user_id',
+            $targetUserId
+
+        )
+
+        ->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | REDIRECT KE ROOM CHAT
+    |--------------------------------------------------------------------------
+    */
+
+    if($iklan){
+
+        return redirect('/chat/' . $iklan->id);
+
+    }
+
+    return view('empty-chat');
+
+}
 
 }

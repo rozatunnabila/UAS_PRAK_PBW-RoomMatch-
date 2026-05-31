@@ -77,37 +77,65 @@ body{
 }
 
 .logo span{
+
     color:#C8A96B;
 }
 
-/* Search */
+/* SEARCH */
 
 .search{
 
     padding:20px;
 }
 
-.search input{
+.search-box{
 
-    width:100%;
+    display:flex;
+    align-items:center;
+
+    gap:10px;
 
     background:#162033;
 
-    border:none;
+    border:1px solid #23314F;
+
+    padding:14px 16px;
 
     border-radius:16px;
+}
 
-    padding:16px;
+.search-box input{
 
-    color:white;
+    width:100%;
+
+    background:transparent;
+
+    border:none;
 
     outline:none;
+
+    color:white;
 
     font-size:14px;
 }
 
-.search input::placeholder{
-    color:#94A3B8;
+/* MATCH BADGE */
+
+.match-badge{
+
+    margin:0 20px 18px;
+
+    background:#C8A96B;
+
+    color:#0F172A;
+
+    padding:12px 16px;
+
+    border-radius:14px;
+
+    font-weight:700;
+
+    font-size:14px;
 }
 
 /* Chat List */
@@ -146,8 +174,6 @@ body{
 .chat-item:hover{
 
     background:#162033;
-
-    transform:translateX(3px);
 }
 
 .chat-item.active{
@@ -204,7 +230,7 @@ body{
     flex-direction:column;
 }
 
-/* TOP LEFT */
+/* Top Left */
 
 .top-left{
 
@@ -228,37 +254,6 @@ body{
 
     font-size:14px;
     font-weight:500;
-
-    padding:8px 14px;
-
-    border-radius:10px;
-
-    transition:0.25s ease;
-
-    background:transparent;
-}
-
-/* HOVER */
-
-.back-btn:hover{
-
-    background:rgba(200,169,107,0.12);
-
-    color:#F5D08A;
-
-    transform:translateX(-2px);
-}
-
-/* ICON */
-
-.back-btn svg{
-
-    transition:0.25s ease;
-}
-
-.back-btn:hover svg{
-
-    transform:translateX(-3px);
 }
 
 /* Top Bar */
@@ -296,8 +291,6 @@ body{
     border-radius:50%;
 
     object-fit:cover;
-
-    border:2px solid #23314F;
 }
 
 .chat-user h3{
@@ -331,17 +324,72 @@ body{
     font-weight:bold;
 
     cursor:pointer;
-
-    transition:0.3s;
-
-    font-size:15px;
 }
 
-.match-btn:hover{
+/* MATCH NOTIFICATION */
 
-    background:#b89255;
+.match-notification{
 
-    transform:scale(1.03);
+    margin:20px 30px 0;
+
+    background:#162033;
+
+    border:1px solid #23314F;
+
+    border-radius:22px;
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+/* ACTIONS */
+
+.match-actions{
+
+    display:flex;
+
+    gap:10px;
+}
+
+/* ACCEPT */
+
+.accept-btn{
+
+    background:#C8A96B;
+
+    color:#0F172A;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+/* REJECT */
+
+.reject-btn{
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    cursor:pointer;
 }
 
 /* Chat Body */
@@ -452,43 +500,115 @@ body{
     color:#0F172A;
 
     cursor:pointer;
+}
+
+/* POPUP */
+
+.popup-overlay{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.65);
 
     display:flex;
     align-items:center;
     justify-content:center;
 
+    opacity:0;
+    visibility:hidden;
+
     transition:0.3s;
+
+    z-index:999;
 }
 
-.send-btn:hover{
+.popup-overlay.active{
 
-    background:#b89255;
-
-    transform:scale(1.05);
+    opacity:1;
+    visibility:visible;
 }
 
-/* Scrollbar */
+.popup-box{
 
-::-webkit-scrollbar{
+    width:420px;
 
-    width:6px;
+    background:#0F172A;
+
+    border:1px solid #23314F;
+
+    border-radius:28px;
+
+    padding:35px;
+
+    text-align:center;
 }
 
-::-webkit-scrollbar-thumb{
+.popup-icon{
 
-    background:#23314F;
+    width:80px;
+    height:80px;
 
-    border-radius:20px;
+    margin:auto;
+    margin-bottom:20px;
+
+    border-radius:50%;
+
+    background:rgba(200,169,107,0.12);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:34px;
 }
 
-/* Responsive */
+.popup-buttons{
 
-@media(max-width:768px){
+    display:flex;
 
-    .sidebar{
-        display:none;
-    }
+    gap:15px;
+}
 
+.cancel-btn{
+
+    flex:1;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#162033;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.confirm-btn{
+
+    flex:1;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#C8A96B;
+
+    color:#0F172A;
+
+    font-weight:bold;
+
+    cursor:pointer;
 }
 
 </style>
@@ -511,37 +631,163 @@ body{
 
         <div class="search">
 
-            <input
-                type="text"
-                placeholder="Cari chat...">
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchChat"
+                    placeholder="Cari chat...">
+
+            </div>
 
         </div>
+
+        @if($matchRequests->count() > 0)
+
+        <div class="match-badge">
+
+            🔔 {{ $matchRequests->count() }}
+            Match Request
+
+        </div>
+
+        @endif
+
+        <!-- CHAT LIST -->
 
         <div class="chat-list">
 
             @foreach($contacts as $contact)
 
+                @php
+
+                    $contactIklan = \App\Models\Iklan::where(
+
+                            'user_id',
+                            $contact->id
+
+                        )
+
+                        ->first();
+
+                @endphp
+
+                @if($contactIklan)
+
                 <a
-                    href="/chat/{{ $contact->id }}"
-                    class="chat-item {{ $receiver->id == $contact->id ? 'active' : '' }}">
+                    href="/chat/{{ $contactIklan->id }}"
+                    class="chat-item {{ $receiver->user_id == $contact->id ? 'active' : '' }}">
 
                     <img
-                        src="{{ asset($contact->gambar) }}"
+                        src="{{ asset($contactIklan->gambar) }}"
                         class="avatar">
+                    
+                    @php
 
+    $unreadCount = \App\Models\Chat::where(
+
+            'sender_id',
+            $contact->id
+
+        )
+
+        ->where(
+
+            'receiver_id',
+            Auth::id()
+
+        )
+
+        ->where(
+
+            'is_read',
+            false
+
+        )
+
+        ->count();
+
+@endphp
                     <div class="chat-info">
 
                         <h4>
-                            {{ $contact->judul }}
+
+                            {{ $contact->name }}
+
                         </h4>
 
-                        <p>
-                            {{ $contact->lokasi }}
-                        </p>
+                        <div style="
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+">
 
+    <p>
+
+        {{ $contactIklan->lokasi }}
+
+    </p>
+
+    @if($unreadCount > 0)
+
+    <span style="
+        background:#C8A96B;
+        color:#0F172A;
+
+        min-width:22px;
+        height:22px;
+
+        border-radius:50%;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        font-size:12px;
+        font-weight:bold;
+
+        padding:0 6px;
+    ">
+
+        {{ $unreadCount }}
+
+    </span>
+
+    @endif
+
+</div>
+
+                    @php
+
+    $unreadCount = \App\Models\Chat::where(
+
+            'sender_id',
+            $contact->id
+
+        )
+
+        ->where(
+
+            'receiver_id',
+            Auth::id()
+
+        )
+
+        ->where(
+
+            'is_read',
+            false
+
+        )
+
+        ->count();
+
+@endphp
                     </div>
 
                 </a>
+
+                @endif
 
             @endforeach
 
@@ -553,35 +799,15 @@ body{
 
     <div class="main-chat">
 
-        <!-- TOP BAR -->
-
         <div class="top-bar">
 
             <div class="top-left">
 
-                <!-- BUTTON KEMBALI -->
-
                 <a href="/dashboard" class="back-btn">
 
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        viewBox="0 0 24 24">
-
-                        <path d="M19 12H5"></path>
-
-                        <path d="M12 19l-7-7 7-7"></path>
-
-                    </svg>
-
-                    Kembali
+                    ← Kembali
 
                 </a>
-
-                <!-- USER -->
 
                 <div class="chat-user">
 
@@ -603,15 +829,94 @@ body{
 
             </div>
 
-            <!-- MATCH BUTTON -->
+            @if($currentMatch && $currentMatch->status == 'pending')
 
-            <button class="match-btn">
-                Match
+            <button class="match-btn" disabled>
+
+                Menunggu Persetujuan
+
             </button>
+
+            @elseif($currentMatch && $currentMatch->status == 'accepted')
+
+            <button class="match-btn" disabled>
+
+                Sudah Match
+
+            </button>
+
+            @else
+
+            <button
+                class="match-btn"
+                onclick="openMatchPopup()">
+
+                Match
+
+            </button>
+
+            @endif
 
         </div>
 
-        <!-- Chat Body -->
+        @if($pendingMatch)
+
+        <div class="match-notification">
+
+            <div>
+
+                <h4>
+
+                    🤝 Match Request
+
+                </h4>
+
+                <p>
+
+                    {{ $receiver->judul }}
+                    ingin match dengan kamu
+
+                </p>
+
+            </div>
+
+            <div class="match-actions">
+
+                <form
+                    action="/match/accept/{{ $pendingMatch->id }}"
+                    method="POST">
+
+                    @csrf
+
+                    <button class="accept-btn">
+
+                        Terima
+
+                    </button>
+
+                </form>
+
+                <form
+                    action="/match/reject/{{ $pendingMatch->id }}"
+                    method="POST">
+
+                    @csrf
+
+                    <button class="reject-btn">
+
+                        Tolak
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        @endif
+
+        <!-- CHAT BODY -->
 
         <div class="chat-body">
 
@@ -627,7 +932,7 @@ body{
 
         </div>
 
-        <!-- Input -->
+        <!-- INPUT -->
 
         <form
             action="/chat/send/{{ $receiver->id }}"
@@ -644,19 +949,7 @@ body{
 
             <button class="send-btn">
 
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    width="22"
-                    height="22"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24">
-
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-
-                </svg>
+                ➤
 
             </button>
 
@@ -665,6 +958,108 @@ body{
     </div>
 
 </div>
+
+<!-- MATCH POPUP -->
+
+<div class="popup-overlay" id="matchPopup">
+
+    <div class="popup-box">
+
+        <div class="popup-icon">
+
+            🤝
+
+        </div>
+
+        <h2>
+            Yakin ingin match?
+        </h2>
+
+        <p>
+
+            Jika kalian sama-sama setuju,
+            roommate akan otomatis terhubung.
+
+        </p>
+
+        <div class="popup-buttons">
+
+            <button
+                class="cancel-btn"
+                onclick="closeMatchPopup()">
+
+                Tidak
+
+            </button>
+
+            <form
+                action="/match/{{ $receiver->id }}"
+                method="POST"
+                style="flex:1;">
+
+                @csrf
+
+                <button
+                    type="submit"
+                    class="confirm-btn">
+
+                    Ya, Match
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const searchInput = document.getElementById('searchChat');
+
+searchInput.addEventListener('keyup', function(){
+
+    let keyword = this.value.toLowerCase();
+
+    let contacts = document.querySelectorAll('.chat-item');
+
+    contacts.forEach(contact => {
+
+        let text = contact.innerText.toLowerCase();
+
+        if(text.includes(keyword)){
+
+            contact.style.display = 'flex';
+
+        }else{
+
+            contact.style.display = 'none';
+
+        }
+
+    });
+
+});
+
+function openMatchPopup(){
+
+    document
+        .getElementById('matchPopup')
+        .classList
+        .add('active');
+}
+
+function closeMatchPopup(){
+
+    document
+        .getElementById('matchPopup')
+        .classList
+        .remove('active');
+}
+
+</script>
 
 </body>
 </html>

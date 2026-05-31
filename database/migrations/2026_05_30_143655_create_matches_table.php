@@ -14,15 +14,9 @@ return new class extends Migration
 
             $table->id();
 
-            $table->unsignedBigInteger('user1_id');
+            $table->unsignedBigInteger('sender_id');
 
-            $table->unsignedBigInteger('user2_id');
-
-            $table->boolean('user1_confirm')->default(false);
-
-            $table->boolean('user2_confirm')->default(false);
-
-            $table->timestamp('expired_at')->nullable();
+            $table->unsignedBigInteger('receiver_id');
 
             $table->string('status')->default('pending');
 
