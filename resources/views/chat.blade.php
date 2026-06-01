@@ -502,7 +502,415 @@ body{
     cursor:pointer;
 }
 
-/* POPUP */
+/* POPUP OVERLAY */
+
+.popup-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.72);
+
+    backdrop-filter:blur(4px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:0.3s ease;
+
+    z-index:9999;
+}
+
+.popup-overlay.active{
+
+    opacity:1;
+    visibility:visible;
+}
+
+/* POPUP BOX */
+
+.popup-box{
+
+    width:470px;
+
+    background:linear-gradient(
+        180deg,
+        #101B32 0%,
+        #0B1425 100%
+    );
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    border-radius:34px;
+
+    padding:45px 38px;
+
+    text-align:center;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45);
+
+    transform:translateY(20px) scale(0.96);
+
+    transition:0.3s ease;
+}
+
+.popup-overlay.active .popup-box{
+
+    transform:translateY(0) scale(1);
+}
+
+/* ICON */
+
+.popup-icon{
+
+    width:105px;
+    height:105px;
+
+    margin:auto;
+    margin-bottom:28px;
+
+    border-radius:50%;
+
+    background:rgba(200,169,107,0.12);
+
+    border:1px solid rgba(200,169,107,0.18);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:44px;
+
+    box-shadow:
+        0 10px 30px rgba(200,169,107,0.12);
+}
+
+/* TITLE */
+
+.popup-box h2{
+
+    font-size:38px;
+
+    line-height:1.2;
+
+    margin-bottom:14px;
+
+    color:white;
+
+    font-weight:700;
+}
+
+/* DESCRIPTION */
+
+.popup-box p{
+
+    color:#94A3B8;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    margin-bottom:34px;
+}
+
+/* BUTTONS */
+
+.popup-buttons{
+
+    display:flex;
+
+    gap:16px;
+}
+
+/* CANCEL BUTTON */
+
+.cancel-btn{
+
+    flex:1;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#162033;
+
+    color:white;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+}
+
+.cancel-btn:hover{
+
+    background:#1C2942;
+
+    transform:translateY(-2px);
+}
+
+/* CONFIRM BUTTON */
+
+.confirm-btn{
+
+    flex:1;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#C8A96B;
+
+    color:#0F172A;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+
+    box-shadow:
+        0 10px 25px rgba(200,169,107,0.22);
+}
+
+.confirm-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(200,169,107,0.28);
+}
+/* MATCH SUCCESS */
+
+.match-success-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.75);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:99999;
+
+    animation:fadeIn 0.3s ease;
+}
+
+.match-success-popup{
+
+    width:430px;
+
+    background:#0F172A;
+
+    border:1px solid #23314F;
+
+    border-radius:32px;
+
+    padding:45px 35px;
+
+    text-align:center;
+
+    animation:popupScale 0.35s ease;
+}
+
+.match-icon{
+
+    width:110px;
+    height:110px;
+
+    margin:auto;
+    margin-bottom:25px;
+
+    border-radius:50%;
+
+    background:rgba(200,169,107,0.12);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:50px;
+}
+
+.match-success-popup h1{
+
+    font-size:42px;
+
+    margin-bottom:16px;
+
+    color:white;
+}
+
+.match-success-popup p{
+
+    color:#94A3B8;
+
+    line-height:1.7;
+
+    margin-bottom:30px;
+}
+
+.match-success-popup button{
+
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#C8A96B;
+
+    color:#0F172A;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.match-success-popup button:hover{
+
+    transform:translateY(-2px);
+}
+
+@keyframes popupScale{
+
+    from{
+
+        transform:scale(0.7);
+
+        opacity:0;
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+    }
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+    }
+
+    to{
+
+        opacity:1;
+    }
+}
+
+/* PENDING POPUP */
+
+.pending-popup-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.72);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:999999;
+}
+
+.pending-popup-box{
+
+    width:430px;
+
+    background:#0F172A;
+
+    border:1px solid #23314F;
+
+    border-radius:32px;
+
+    padding:40px 35px;
+
+    text-align:center;
+
+    animation:popupScale 0.3s ease;
+}
+
+.pending-icon{
+
+    width:100px;
+    height:100px;
+
+    margin:auto;
+    margin-bottom:24px;
+
+    border-radius:50%;
+
+    background:rgba(200,169,107,0.12);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:46px;
+}
+
+.pending-popup-box h2{
+
+    font-size:34px;
+
+    margin-bottom:14px;
+}
+
+.pending-popup-box p{
+
+    color:#94A3B8;
+
+    line-height:1.7;
+
+    margin-bottom:28px;
+}
+
+.pending-popup-box button{
+
+    width:100%;
+
+    height:56px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#C8A96B;
+
+    color:#0F172A;
+
+    font-size:15px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
 
 .popup-overlay{
 
@@ -514,89 +922,64 @@ body{
     width:100%;
     height:100%;
 
-    background:rgba(0,0,0,0.65);
+    background:rgba(0,0,0,0.6);
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    opacity:0;
-    visibility:hidden;
-
-    transition:0.3s;
-
-    z-index:999;
-}
-
-.popup-overlay.active{
-
-    opacity:1;
-    visibility:visible;
+    z-index:99999;
 }
 
 .popup-box{
 
     width:420px;
 
-    background:#0F172A;
+    background:#162033;
 
     border:1px solid #23314F;
 
     border-radius:28px;
 
-    padding:35px;
+    padding:40px 35px;
 
     text-align:center;
+
+    animation:popupShow 0.25s ease;
 }
 
 .popup-icon{
 
-    width:80px;
-    height:80px;
+    font-size:52px;
 
-    margin:auto;
-    margin-bottom:20px;
-
-    border-radius:50%;
-
-    background:rgba(200,169,107,0.12);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:34px;
+    margin-bottom:18px;
 }
 
-.popup-buttons{
-
-    display:flex;
-
-    gap:15px;
-}
-
-.cancel-btn{
-
-    flex:1;
-
-    height:55px;
-
-    border:none;
-
-    border-radius:16px;
-
-    background:#162033;
+.popup-box h2{
 
     color:white;
 
-    cursor:pointer;
+    margin-bottom:14px;
+
+    font-size:28px;
 }
 
-.confirm-btn{
+.popup-box p{
 
-    flex:1;
+    color:#CBD5E1;
 
-    height:55px;
+    line-height:1.7;
+
+    font-size:15px;
+}
+
+.popup-box button{
+
+    margin-top:28px;
+
+    width:100%;
+
+    height:52px;
 
     border:none;
 
@@ -609,6 +992,26 @@ body{
     font-weight:bold;
 
     cursor:pointer;
+
+    font-size:15px;
+}
+
+@keyframes popupShow{
+
+    from{
+
+        opacity:0;
+        transform:scale(0.85);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:scale(1);
+
+    }
+
 }
 
 </style>
@@ -659,137 +1062,124 @@ body{
 
             @foreach($contacts as $contact)
 
-                @php
+    @php
 
-                    $contactIklan = \App\Models\Iklan::where(
+        $contactIklan = \App\Models\Iklan::where(
 
-                            'user_id',
-                            $contact->id
+                'user_id',
+                $contact->id
 
-                        )
+            )
 
-                        ->first();
+            ->latest()
 
-                @endphp
+            ->first();
 
-                @if($contactIklan)
+        $unreadCount = \App\Models\Chat::where(
 
-                <a
-                    href="/chat/{{ $contactIklan->id }}"
-                    class="chat-item {{ $receiver->user_id == $contact->id ? 'active' : '' }}">
+                'sender_id',
+                $contact->id
 
-                    <img
-                        src="{{ asset($contactIklan->gambar) }}"
-                        class="avatar">
-                    
-                    @php
+            )
 
-    $unreadCount = \App\Models\Chat::where(
+            ->where(
 
-            'sender_id',
-            $contact->id
+                'receiver_id',
+                Auth::id()
 
-        )
+            )
 
-        ->where(
+            ->where(
 
-            'receiver_id',
-            Auth::id()
+                'is_read',
+                false
 
-        )
+            )
 
-        ->where(
+            ->count();
 
-            'is_read',
-            false
+    @endphp
 
-        )
+    <a
+        href="/chat/{{ $contact->id }}"
+        class="chat-item {{ $receiver->id == $contact->id ? 'active' : '' }}">
 
-        ->count();
+        @if($contactIklan && $contactIklan->gambar)
 
-@endphp
-                    <div class="chat-info">
+            <img
+                src="{{ asset($contactIklan->gambar) }}"
+                class="avatar">
 
-                        <h4>
+        @else
 
-                            {{ $contact->name }}
+            <img
+                src="{{ asset('default.png') }}"
+                class="avatar">
 
-                        </h4>
+        @endif
 
-                        <div style="
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-">
+        <div class="chat-info">
 
-    <p>
+            <h4>
 
-        {{ $contactIklan->lokasi }}
+                {{ $contact->name }}
 
-    </p>
+            </h4>
 
-    @if($unreadCount > 0)
+            <div style="
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+            ">
 
-    <span style="
-        background:#C8A96B;
-        color:#0F172A;
+                <p>
 
-        min-width:22px;
-        height:22px;
+                    @if($contactIklan)
 
-        border-radius:50%;
+                        {{ $contactIklan->lokasi }}
 
-        display:flex;
-        align-items:center;
-        justify-content:center;
+                    @else
 
-        font-size:12px;
-        font-weight:bold;
+                        Belum memiliki iklan
 
-        padding:0 6px;
-    ">
+                    @endif
 
-        {{ $unreadCount }}
+                </p>
 
-    </span>
+                @if($unreadCount > 0)
 
-    @endif
+                <span style="
+                    background:#C8A96B;
+                    color:#0F172A;
 
-</div>
+                    min-width:22px;
+                    height:22px;
 
-                    @php
+                    border-radius:50%;
 
-    $unreadCount = \App\Models\Chat::where(
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
 
-            'sender_id',
-            $contact->id
+                    font-size:12px;
+                    font-weight:bold;
 
-        )
+                    padding:0 6px;
+                ">
 
-        ->where(
+                    {{ $unreadCount }}
 
-            'receiver_id',
-            Auth::id()
-
-        )
-
-        ->where(
-
-            'is_read',
-            false
-
-        )
-
-        ->count();
-
-@endphp
-                    </div>
-
-                </a>
+                </span>
 
                 @endif
 
-            @endforeach
+            </div>
+
+        </div>
+
+    </a>
+
+@endforeach
 
         </div>
 
@@ -799,67 +1189,87 @@ body{
 
     <div class="main-chat">
 
-        <div class="top-bar">
+    <div class="top-bar">
 
-            <div class="top-left">
+        <div class="top-left">
 
-                <a href="/dashboard" class="back-btn">
+            <a href="/dashboard" class="back-btn">
 
-                    ← Kembali
+                ← Kembali
 
-                </a>
+            </a>
 
-                <div class="chat-user">
+            <div class="chat-user">
 
-                    <img src="{{ asset($receiver->gambar) }}">
+                @if($receiverIklan && $receiverIklan->gambar)
 
-                    <div>
+                    <img src="{{ asset($receiverIklan->gambar) }}">
 
-                        <h3>
-                            {{ $receiver->judul }}
-                        </h3>
+                @else
 
-                        <p>
-                            Active now
-                        </p>
+                    <img src="{{ asset('default.png') }}">
 
-                    </div>
+                @endif
+
+                <div>
+
+                    <h3>
+
+                        @if($receiverIklan)
+
+                            {{ $receiverIklan->judul }}
+
+                        @else
+
+                            {{ $receiver->name }}
+
+                        @endif
+
+                    </h3>
+
+                    <p>
+
+                        Active now
+
+                    </p>
 
                 </div>
 
             </div>
 
-            @if($currentMatch && $currentMatch->status == 'pending')
-
-            <button class="match-btn" disabled>
-
-                Menunggu Persetujuan
-
-            </button>
-
-            @elseif($currentMatch && $currentMatch->status == 'accepted')
-
-            <button class="match-btn" disabled>
-
-                Sudah Match
-
-            </button>
-
-            @else
-
-            <button
-                class="match-btn"
-                onclick="openMatchPopup()">
-
-                Match
-
-            </button>
-
-            @endif
-
         </div>
 
-        @if($pendingMatch)
+        @if($currentMatch && $currentMatch->status == 'pending')
+
+        <button class="match-btn" disabled>
+
+            Menunggu Persetujuan
+
+        </button>
+
+        @elseif($currentMatch && $currentMatch->status == 'accepted')
+
+        <button class="match-btn" disabled>
+
+            Sudah Match
+
+        </button>
+
+        @else
+
+        <button
+            class="match-btn"
+            onclick="openMatchPopup()">
+
+            Match
+
+        </button>
+
+        @endif
+
+    </div>
+
+    @if($pendingMatch)
 
         <div class="match-notification">
 
@@ -1017,6 +1427,8 @@ body{
 
 <script>
 
+    
+
 const searchInput = document.getElementById('searchChat');
 
 searchInput.addEventListener('keyup', function(){
@@ -1059,7 +1471,192 @@ function closeMatchPopup(){
         .remove('active');
 }
 
+function closeMatchSuccess(){
+
+    document
+        .querySelector('.match-success-overlay')
+        .style
+        .display = 'none';
+}
+
+function closePendingPopup(){
+
+    document
+        .querySelector('.pending-popup-overlay')
+        .style
+        .display = 'none';
+}
+
+function closePopup(){
+
+    document
+        .getElementById('matchErrorPopup')
+        .style
+        .display = 'none';
+}
+
 </script>
+
+@if(session('match_success'))
+
+<div class="match-success-overlay active">
+
+    <div class="match-success-popup">
+
+        <div class="match-icon">
+
+            🤝
+
+        </div>
+
+        <h1>
+
+            It's a Match!
+
+        </h1>
+
+        <p>
+
+            Kalian sekarang sudah terhubung
+            dan bisa mulai menjadi roommate.
+
+        </p>
+
+        <button onclick="closeMatchSuccess()">
+
+            Mulai Chat
+
+        </button>
+
+    </div>
+
+</div>
+
+@endif
+
+@if(session('match_error'))
+
+<div class="match-error">
+
+    {{ session('match_error') }}
+
+</div>
+
+@endif
+
+@if(session('match_pending_popup'))
+
+<div class="pending-popup-overlay active">
+
+    <div class="pending-popup-box">
+
+        <div class="pending-icon">
+
+            ⏳
+
+        </div>
+
+        <h2>
+
+            Match Masih Aktif
+
+        </h2>
+
+        <p>
+
+            Kamu sudah melakukan match dengan pengguna lain.
+            Tunggu hingga match dibalas atau masa berlaku
+            24 jam berakhir sebelum melakukan match lagi.
+
+        </p>
+
+        <button onclick="closePendingPopup()">
+
+            Mengerti
+
+        </button>
+
+    </div>
+
+</div>
+
+@endif
+
+@if(session('already_match_popup'))
+
+<div class="pending-popup-overlay active">
+
+    <div class="pending-popup-box">
+
+        <div class="pending-icon">
+
+            ⚠️
+
+        </div>
+
+        <h2>
+
+            Match Sudah Aktif
+
+        </h2>
+
+        <p>
+
+            Kamu sudah memiliki roommate aktif
+            dan tidak bisa menerima match lain.
+
+        </p>
+
+        <button onclick="closePendingPopup()">
+
+            Mengerti
+
+        </button>
+
+    </div>
+
+</div>
+
+@endif
+
+@if(session('already_have_match'))
+
+<div class="popup-overlay" id="matchErrorPopup">
+
+    <div class="popup-box">
+
+        <div class="popup-icon">
+
+            ⚠️
+
+        </div>
+
+        <h2>
+
+            Match Tidak Bisa Dilakukan
+
+        </h2>
+
+        <p>
+
+            Kamu sudah memiliki roommate yang match.
+            Satu akun hanya bisa memiliki satu match aktif.
+
+        </p>
+
+        <button onclick="closePopup()">
+
+            Oke
+
+        </button>
+
+    </div>
+
+</div>
+
+@endif
+
+
 
 </body>
 </html>

@@ -21,240 +21,242 @@ class ChatController extends Controller
     */
 
     public function index($id)
-    {
-
-        /*
-        |--------------------------------------------------------------------------
-        | AMBIL IKLAN YANG DIKLIK
-        |--------------------------------------------------------------------------
-        */
-
-        $receiver = Iklan::findOrFail($id);
-
-        /*
-        |--------------------------------------------------------------------------
-        | USER TUJUAN
-        |--------------------------------------------------------------------------
-        */
-
-        $receiverUserId = $receiver->user_id;
-
-        /*
-|--------------------------------------------------------------------------
-| READ CHAT
-|--------------------------------------------------------------------------
-*/
-
-Chat::where(
-
-        'sender_id',
-        $receiverUserId
-
-    )
-
-    ->where(
-
-        'receiver_id',
-        Auth::id()
-
-    )
-
-    ->update([
-
-        'is_read' => true
-
-    ]);
-
-        /*
-        |--------------------------------------------------------------------------
-        | AMBIL SEMUA CHAT
-        |--------------------------------------------------------------------------
-        */
-
-        $messages = Chat::where(function($query) use ($receiverUserId){
-
-                $query->where('sender_id', Auth::id())
-                      ->where('receiver_id', $receiverUserId);
-
-            })
-
-            ->orWhere(function($query) use ($receiverUserId){
-
-                $query->where('sender_id', $receiverUserId)
-                      ->where('receiver_id', Auth::id());
-
-            })
-
-            ->orderBy('created_at', 'asc')
-
-            ->get();
-
-        /*
-        |--------------------------------------------------------------------------
-        | CONTACT SIDEBAR DARI CHAT
-        |--------------------------------------------------------------------------
-        */
-
-        $chatUsers = Chat::where('sender_id', Auth::id())
-
-            ->orWhere('receiver_id', Auth::id())
-
-            ->latest()
-
-            ->get();
-
-        /*
-        |--------------------------------------------------------------------------
-        | AMBIL USER UNIK
-        |--------------------------------------------------------------------------
-        */
-
-        $userIds = [];
-
-        foreach($chatUsers as $chat){
-
-            if($chat->sender_id != Auth::id()){
-
-                $userIds[] = $chat->sender_id;
-
-            }
-
-            if($chat->receiver_id != Auth::id()){
-
-                $userIds[] = $chat->receiver_id;
-
-            }
-
-        }
-
-        $userIds = array_unique($userIds);
-
-        /*
-        |--------------------------------------------------------------------------
-        | AMBIL IKLAN USER
-        |--------------------------------------------------------------------------
-        */
-
-       $contacts = Chat::where('sender_id', Auth::id())
-
-    ->orWhere('receiver_id', Auth::id())
-
-    ->latest()
-
-    ->get()
-
-    ->map(function($chat){
-
-        if($chat->sender_id == Auth::id()){
-
-            return $chat->receiver_id;
-
-        }
-
-        return $chat->sender_id;
-
-    })
-
-    ->unique()
-
-    ->values();
+{
 
     /*
-|--------------------------------------------------------------------------
-| AMBIL DATA USER CONTACT
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | AMBIL USER TUJUAN
+    |--------------------------------------------------------------------------
+    */
 
-$contacts = User::whereIn(
+    $receiver = User::findOrFail($id);
 
-        'id',
-        $contacts
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL IKLAN USER (JIKA ADA)
+    |--------------------------------------------------------------------------
+    */
 
-    )
+    $receiverIklan = Iklan::where(
 
-    ->get();
+            'user_id',
+            $receiver->id
 
-        /*
-        |--------------------------------------------------------------------------
-        | CEK PENDING MATCH
-        |--------------------------------------------------------------------------
-        */
+        )
 
-        $pendingMatch = RoomMatch::where(
+        ->latest()
 
-                'receiver_id',
-                Auth::id()
+        ->first();
 
-            )
+    /*
+    |--------------------------------------------------------------------------
+    | USER ID TUJUAN
+    |--------------------------------------------------------------------------
+    */
 
-            ->where('sender_id', $receiver->user_id)
+    $receiverUserId = $receiver->id;
 
-            ->where('status', 'pending')
+    /*
+    |--------------------------------------------------------------------------
+    | READ CHAT
+    |--------------------------------------------------------------------------
+    */
 
-            ->first();
+    Chat::where(
 
-        /*
-        |--------------------------------------------------------------------------
-        | MATCH REQUEST MASUK
-        |--------------------------------------------------------------------------
-        */
+            'sender_id',
+            $receiverUserId
 
-        $matchRequests = RoomMatch::where(
+        )
 
-                'receiver_id',
-                Auth::id()
+        ->where(
 
-            )
+            'receiver_id',
+            Auth::id()
 
-            ->where('status', 'pending')
+        )
 
-            ->latest()
+        ->update([
 
-            ->get();
+            'is_read' => true
 
-        /*
-        |--------------------------------------------------------------------------
-        | CEK STATUS MATCH
-        |--------------------------------------------------------------------------
-        */
+        ]);
 
-        $currentMatch = RoomMatch::where(function($query) use ($receiver){
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL SEMUA CHAT
+    |--------------------------------------------------------------------------
+    */
 
-                $query->where('sender_id', Auth::id())
-                      ->where('receiver_id', $receiver->user_id);
+    $messages = Chat::where(function($query) use ($receiverUserId){
 
-            })
+            $query->where('sender_id', Auth::id())
+                  ->where('receiver_id', $receiverUserId);
 
-            ->orWhere(function($query) use ($receiver){
+        })
 
-                $query->where('sender_id', $receiver->user_id)
-                      ->where('receiver_id', Auth::id());
+        ->orWhere(function($query) use ($receiverUserId){
 
-            })
+            $query->where('sender_id', $receiverUserId)
+                  ->where('receiver_id', Auth::id());
 
-            ->latest()
+        })
 
-            ->first();
+        ->orderBy('created_at', 'asc')
 
-        /*
-        |--------------------------------------------------------------------------
-        | RETURN VIEW
-        |--------------------------------------------------------------------------
-        */
+        ->get();
 
-        return view('chat', compact(
+    /*
+    |--------------------------------------------------------------------------
+    | CONTACT SIDEBAR DARI CHAT
+    |--------------------------------------------------------------------------
+    */
 
-            'receiver',
-            'messages',
-            'contacts',
-            'pendingMatch',
-            'matchRequests',
-            'currentMatch'
+    $chatUsers = Chat::where('sender_id', Auth::id())
 
-        ));
+        ->orWhere('receiver_id', Auth::id())
+
+        ->latest()
+
+        ->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL USER UNIK
+    |--------------------------------------------------------------------------
+    */
+
+    $userIds = [];
+
+    foreach($chatUsers as $chat){
+
+        if($chat->sender_id != Auth::id()){
+
+            $userIds[] = $chat->sender_id;
+
+        }
+
+        if($chat->receiver_id != Auth::id()){
+
+            $userIds[] = $chat->receiver_id;
+
+        }
 
     }
 
+    $userIds = array_unique($userIds);
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL CONTACT USER
+    |--------------------------------------------------------------------------
+    */
+
+    $contacts = User::whereIn(
+
+            'id',
+            $userIds
+
+        )
+
+        ->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | CEK PENDING MATCH
+    |--------------------------------------------------------------------------
+    */
+
+    $pendingMatch = RoomMatch::where(
+
+            'receiver_id',
+            Auth::id()
+
+        )
+
+        ->where(
+
+            'sender_id',
+            $receiver->id
+
+        )
+
+        ->where(
+
+            'status',
+            'pending'
+
+        )
+
+        ->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | MATCH REQUEST MASUK
+    |--------------------------------------------------------------------------
+    */
+
+    $matchRequests = RoomMatch::where(
+
+            'receiver_id',
+            Auth::id()
+
+        )
+
+        ->where(
+
+            'status',
+            'pending'
+
+        )
+
+        ->latest()
+
+        ->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | CEK STATUS MATCH
+    |--------------------------------------------------------------------------
+    */
+
+    $currentMatch = RoomMatch::where(function($query) use ($receiver){
+
+            $query->where('sender_id', Auth::id())
+                  ->where('receiver_id', $receiver->id);
+
+        })
+
+        ->orWhere(function($query) use ($receiver){
+
+            $query->where('sender_id', $receiver->id)
+                  ->where('receiver_id', Auth::id());
+
+        })
+
+        ->latest()
+
+        ->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | RETURN VIEW
+    |--------------------------------------------------------------------------
+    */
+
+    return view('chat', compact(
+
+        'receiver',
+        'receiverIklan',
+        'messages',
+        'contacts',
+        'pendingMatch',
+        'matchRequests',
+        'currentMatch'
+
+    ));
+
+}
     /*
     |--------------------------------------------------------------------------
     | KIRIM PESAN
@@ -262,53 +264,67 @@ $contacts = User::whereIn(
     */
 
     public function send(Request $request, $id)
-    {
+{
 
-        /*
-        |--------------------------------------------------------------------------
-        | VALIDASI
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | VALIDASI
+    |--------------------------------------------------------------------------
+    */
 
-        $request->validate([
+    $request->validate([
 
-            'message' => 'required'
+        'message' => 'required'
 
-        ]);
+    ]);
 
-        /*
-        |--------------------------------------------------------------------------
-        | AMBIL IKLAN TUJUAN
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL USER TUJUAN
+    |--------------------------------------------------------------------------
+    */
 
-        $receiver = Iklan::findOrFail($id);
+    $receiver = User::findOrFail($id);
 
-        /*
-        |--------------------------------------------------------------------------
-        | SIMPAN CHAT
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | CEK JANGAN CHAT DIRI SENDIRI
+    |--------------------------------------------------------------------------
+    */
 
-        Chat::create([
-
-            'sender_id' => Auth::id(),
-
-            'receiver_id' => $receiver->user_id,
-
-            'message' => $request->message
-
-        ]);
-
-        /*
-        |--------------------------------------------------------------------------
-        | REDIRECT
-        |--------------------------------------------------------------------------
-        */
+    if($receiver->id == Auth::id()){
 
         return back();
 
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | SIMPAN CHAT
+    |--------------------------------------------------------------------------
+    */
+
+    Chat::create([
+
+        'sender_id' => Auth::id(),
+
+        'receiver_id' => $receiver->id,
+
+        'message' => $request->message,
+
+        'is_read' => false
+
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | REDIRECT
+    |--------------------------------------------------------------------------
+    */
+
+    return back();
+
+}
 
     /*
     |--------------------------------------------------------------------------
@@ -317,65 +333,191 @@ $contacts = User::whereIn(
     */
 
     public function match($id)
-    {
+{
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL USER TUJUAN
+    |--------------------------------------------------------------------------
+    */
+
+    $receiver = User::findOrFail($id);
+
+    /*
+    |--------------------------------------------------------------------------
+    | HAPUS MATCH EXPIRED
+    |--------------------------------------------------------------------------
+    */
+
+    RoomMatch::where(
+
+            'status',
+            'pending'
+
+        )
+
+        ->where(
+
+            'expired_at',
+            '<',
+            now()
+
+        )
+
+        ->delete();
+
+
 
         /*
-        |--------------------------------------------------------------------------
-        | AMBIL IKLAN TUJUAN
-        |--------------------------------------------------------------------------
-        */
+|--------------------------------------------------------------------------
+| CEK APAKAH SUDAH PUNYA MATCH ACCEPTED
+|--------------------------------------------------------------------------
+*/
 
-        $receiver = Iklan::findOrFail($id);
+$alreadyAccepted = RoomMatch::where(function($query){
 
-        /*
-        |--------------------------------------------------------------------------
-        | CEK APAKAH SUDAH MATCH
-        |--------------------------------------------------------------------------
-        */
+        $query->where('sender_id', Auth::id())
+              ->orWhere('receiver_id', Auth::id());
 
-        $check = RoomMatch::where('sender_id', Auth::id())
+    })
 
-            ->where('receiver_id', $receiver->user_id)
+    ->where('status', 'accepted')
 
-            ->whereIn('status', [
+    ->first();
 
-                'pending',
-                'accepted'
+/*
+|--------------------------------------------------------------------------
+| JIKA SUDAH MATCH
+|--------------------------------------------------------------------------
+*/
 
-            ])
+if($alreadyAccepted){
 
-            ->first();
+    return back()->with(
 
-        /*
-        |--------------------------------------------------------------------------
-        | JIKA BELUM ADA MATCH
-        |--------------------------------------------------------------------------
-        */
+        'already_have_match',
+        true
 
-        if(!$check){
+    );
 
-            RoomMatch::create([
+}
+    /*
+    |--------------------------------------------------------------------------
+    | CEK APAKAH USER MASIH PUNYA PENDING MATCH
+    |--------------------------------------------------------------------------
+    */
 
-                'sender_id' => Auth::id(),
+    $existingPending = RoomMatch::where(function($query){
 
-                'receiver_id' => $receiver->user_id,
+            $query->where('sender_id', Auth::id())
+                  ->orWhere('receiver_id', Auth::id());
 
-                'status' => 'pending'
+        })
 
-            ]);
+        ->where(
 
-        }
+            'status',
+            'pending'
 
-        /*
-        |--------------------------------------------------------------------------
-        | REDIRECT
-        |--------------------------------------------------------------------------
-        */
+        )
 
-        return back();
+        ->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | JIKA MASIH ADA PENDING
+    |--------------------------------------------------------------------------
+    */
+
+    if($existingPending){
+
+        return back()->with(
+
+            'match_pending_popup',
+            true
+
+        );
 
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | CEK APAKAH SUDAH MATCH
+    |--------------------------------------------------------------------------
+    */
+
+    $alreadyMatch = RoomMatch::where(function($query) use ($receiver){
+
+            $query->where('sender_id', Auth::id())
+                  ->where('receiver_id', $receiver->id);
+
+        })
+
+        ->orWhere(function($query) use ($receiver){
+
+            $query->where('sender_id', $receiver->id)
+                  ->where('receiver_id', Auth::id());
+
+        })
+
+        ->whereIn('status', [
+
+            'pending',
+            'accepted'
+
+        ])
+
+        ->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | JIKA SUDAH ADA
+    |--------------------------------------------------------------------------
+    */
+
+    if($alreadyMatch){
+
+        return back()->with(
+
+            'match_pending_popup',
+            true
+
+        );
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | SIMPAN MATCH
+    |--------------------------------------------------------------------------
+    */
+
+    RoomMatch::create([
+
+        'sender_id' => Auth::id(),
+
+        'receiver_id' => $receiver->id,
+
+        'status' => 'pending',
+
+        'expired_at' => now()->addHours(24)
+
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | REDIRECT
+    |--------------------------------------------------------------------------
+    */
+
+    return back()->with(
+
+        'match_request_sent',
+        true
+
+    );
+
+}
     /*
     |--------------------------------------------------------------------------
     | ACCEPT MATCH
@@ -392,7 +534,78 @@ $contacts = User::whereIn(
         */
 
         $match = RoomMatch::findOrFail($id);
+        /*
+|--------------------------------------------------------------------------
+| CEK APAKAH USER SUDAH PUNYA MATCH ACCEPTED
+|--------------------------------------------------------------------------
+*/
 
+$alreadyAccepted = RoomMatch::where(function($query){
+
+        $query->where('sender_id', Auth::id())
+              ->orWhere('receiver_id', Auth::id());
+
+    })
+
+    ->where(
+
+        'status',
+        'accepted'
+
+    )
+
+    ->first();
+
+/*
+|--------------------------------------------------------------------------
+| JIKA SUDAH ADA MATCH
+|--------------------------------------------------------------------------
+*/
+
+if($alreadyAccepted){
+
+    return back()->with(
+
+        'already_have_match',
+        true
+
+    );
+
+
+    /*
+|--------------------------------------------------------------------------
+| CEK APAKAH SUDAH PUNYA MATCH ACCEPTED
+|--------------------------------------------------------------------------
+*/
+
+$alreadyAccepted = RoomMatch::where(function($query){
+
+        $query->where('sender_id', Auth::id())
+              ->orWhere('receiver_id', Auth::id());
+
+    })
+
+    ->where('status', 'accepted')
+
+    ->first();
+
+/*
+|--------------------------------------------------------------------------
+| JIKA SUDAH MATCH
+|--------------------------------------------------------------------------
+*/
+
+if($alreadyAccepted){
+
+    return back()->with(
+
+        'already_have_match',
+        true
+
+    );
+
+}
+}
         /*
         |--------------------------------------------------------------------------
         | UPDATE STATUS
@@ -401,8 +614,64 @@ $contacts = User::whereIn(
 
         $match->status = 'accepted';
 
+        /*
+|--------------------------------------------------------------------------
+| TOLAK SEMUA PENDING MATCH LAIN
+|--------------------------------------------------------------------------
+*/
+
+RoomMatch::where(function($query) use ($match){
+
+        $query->where('sender_id', $match->sender_id)
+              ->orWhere('receiver_id', $match->sender_id)
+              ->orWhere('sender_id', $match->receiver_id)
+              ->orWhere('receiver_id', $match->receiver_id);
+
+    })
+
+    ->where(
+
+        'status',
+        'pending'
+
+    )
+
+    ->where(
+
+        'id',
+        '!=',
+        $match->id
+
+    )
+
+    ->update([
+
+        'status' => 'rejected'
+
+    ]);
+
         $match->save();
 
+        /*
+|--------------------------------------------------------------------------
+| HAPUS SEMUA PENDING MATCH LAIN
+|--------------------------------------------------------------------------
+*/
+
+RoomMatch::where(function($query) use ($match){
+
+        $query->where('sender_id', $match->sender_id)
+              ->orWhere('receiver_id', $match->sender_id)
+              ->orWhere('sender_id', $match->receiver_id)
+              ->orWhere('receiver_id', $match->receiver_id);
+
+    })
+
+    ->where('status', 'pending')
+
+    ->where('id', '!=', $match->id)
+
+    ->delete();
         /*
         |--------------------------------------------------------------------------
         | IKLAN RECEIVER
@@ -479,7 +748,12 @@ $contacts = User::whereIn(
         |--------------------------------------------------------------------------
         */
 
-        return back();
+        return back()->with(
+
+            'match_success',
+            true
+
+        );
 
     }
 
@@ -526,7 +800,8 @@ $contacts = User::whereIn(
     |--------------------------------------------------------------------------
     */
 
-public function chatList()
+
+    public function chatList()
 {
 
     /*
@@ -581,33 +856,164 @@ public function chatList()
 
     /*
     |--------------------------------------------------------------------------
-    | AMBIL IKLAN USER
+    | REDIRECT KE CHAT USER
     |--------------------------------------------------------------------------
     */
 
-    $iklan = Iklan::where(
-
-            'user_id',
-            $targetUserId
-
-        )
-
-        ->first();
-
-    /*
-    |--------------------------------------------------------------------------
-    | REDIRECT KE ROOM CHAT
-    |--------------------------------------------------------------------------
-    */
-
-    if($iklan){
-
-        return redirect('/chat/' . $iklan->id);
-
-    }
-
-    return view('empty-chat');
+    return redirect('/chat/' . $targetUserId);
 
 }
 
+    public function chatUser($id)
+{
+
+    $user = User::findOrFail($id);
+
+    /*
+    |--------------------------------------------------------------------------
+    | READ CHAT
+    |--------------------------------------------------------------------------
+    */
+
+    Chat::where(
+
+            'sender_id',
+            $user->id
+
+        )
+
+        ->where(
+
+            'receiver_id',
+            Auth::id()
+
+        )
+
+        ->update([
+
+            'is_read' => true
+
+        ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMBIL PESAN
+    |--------------------------------------------------------------------------
+    */
+
+    $messages = Chat::where(function($query) use ($user){
+
+            $query->where('sender_id', Auth::id())
+                  ->where('receiver_id', $user->id);
+
+        })
+
+        ->orWhere(function($query) use ($user){
+
+            $query->where('sender_id', $user->id)
+                  ->where('receiver_id', Auth::id());
+
+        })
+
+        ->orderBy('created_at', 'asc')
+
+        ->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | CONTACT LIST
+    |--------------------------------------------------------------------------
+    */
+
+    $chatUsers = Chat::where('sender_id', Auth::id())
+
+        ->orWhere('receiver_id', Auth::id())
+
+        ->latest()
+
+        ->get();
+
+    $userIds = [];
+
+    foreach($chatUsers as $chat){
+
+        if($chat->sender_id != Auth::id()){
+
+            $userIds[] = $chat->sender_id;
+        }
+
+        if($chat->receiver_id != Auth::id()){
+
+            $userIds[] = $chat->receiver_id;
+        }
+    }
+
+    $contacts = User::whereIn(
+
+            'id',
+            array_unique($userIds)
+
+        )
+
+        ->get();
+
+   $receiver = new \stdClass();
+
+$receiver->id = $user->id;
+
+$receiver->user_id = $user->id;
+
+$receiver->judul = $user->name;
+
+$receiver->nama = $user->name;
+
+$receiver->lokasi = '-';
+
+$receiver->gambar = 'default.png';
+
+/*
+|--------------------------------------------------------------------------
+| MATCH REQUEST
+|--------------------------------------------------------------------------
+*/
+
+$matchRequests = RoomMatch::where(
+
+        'receiver_id',
+        Auth::id()
+
+    )
+
+    ->where(
+
+        'status',
+        'pending'
+
+    )
+
+    ->latest()
+
+    ->get();
+
+/*
+|--------------------------------------------------------------------------
+| CURRENT MATCH
+|--------------------------------------------------------------------------
+*/
+
+$currentMatch = null;
+
+$pendingMatch = null;
+
+return view('chat', compact(
+
+    'receiver',
+    'messages',
+    'contacts',
+    'matchRequests',
+    'currentMatch',
+    'pendingMatch'
+
+));
+}
 }

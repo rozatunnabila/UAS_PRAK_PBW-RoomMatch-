@@ -608,14 +608,15 @@ body{
 
     <div class="right-navbar">
 
-   @if($matchRequests->count() > 0)
+   @if($matchRequests->count() > 0 && $matchUser)
 
-        <a href="/chat/{{ $matchUser->id }}" class="match-notif">
+    <a href="/chat/{{ $matchUser->id }}" class="match-notif">
 
-           🔔 {{ $matchRequests->count() }}
-        </a>
+       🔔 {{ $matchRequests->count() }}
 
-    @endif
+    </a>
+
+@endif
 
     <div class="username">
 
@@ -731,7 +732,7 @@ body{
 
                     @if($roommate->user_id != Auth::id())
 
-                    <a href="/chat/{{ $roommate->id }}" class="match-btn">
+                    <a href="/chat/{{ $roommate->user_id }}" class="match-btn">
 
                         Chat
 

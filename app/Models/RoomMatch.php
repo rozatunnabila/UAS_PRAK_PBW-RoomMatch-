@@ -15,7 +15,9 @@ class RoomMatch extends Model
 
         'receiver_id',
 
-        'status'
+        'status',
+
+        'expired_at'
 
     ];
 

@@ -67,6 +67,10 @@ Route::post('/roommate/store', [DashboardController::class, 'store'])
 |--------------------------------------------------------------------------
 | CHAT
 |--------------------------------------------------------------------------
+|
+| SEKARANG CHAT BERBASIS USER ID
+| BUKAN IKLAN ID
+|
 */
 
 Route::get('/chat/{id}', [ChatController::class, 'index'])
@@ -74,6 +78,10 @@ Route::get('/chat/{id}', [ChatController::class, 'index'])
     ->middleware(['auth']);
 
 Route::post('/chat/send/{id}', [ChatController::class, 'send'])
+
+    ->middleware(['auth']);
+
+Route::get('/chat-list', [ChatController::class, 'chatList'])
 
     ->middleware(['auth']);
 
@@ -128,10 +136,6 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
 });
-
-Route::get('/chat-list', [ChatController::class, 'chatList'])
-
-    ->middleware(['auth']);
 
 /*
 |--------------------------------------------------------------------------
