@@ -19,65 +19,138 @@
 
 body{
 
-    background:#0B1120;
+    background:#EEF3E6;
 
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 
-    color:white;
+    color:#243220;
+
+    min-height:100vh;
+
+    position:relative;
+
+    overflow-x:hidden;
 }
 
-/* Navbar */
+/* =========================
+BACKGROUND EFFECT
+========================= */
+
+body::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    background:
+    radial-gradient(
+        rgba(123,174,82,0.14),
+        transparent 70%
+    );
+
+    top:-250px;
+    right:-180px;
+
+    z-index:0;
+}
+
+body::after{
+
+    content:'';
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:
+    radial-gradient(
+        rgba(123,174,82,0.10),
+        transparent 70%
+    );
+
+    bottom:-180px;
+    left:-120px;
+
+    z-index:0;
+}
+
+/* =========================
+NAVBAR
+========================= */
 
 .navbar{
 
     width:100%;
     height:90px;
 
-    background:#0F172A;
+    background:rgba(255,255,255,0.72);
 
-    border-bottom:1px solid #1E293B;
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid #DDE8CF;
 
     padding:0 60px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:99;
 }
 
-/* Logo */
+/* =========================
+LOGO
+========================= */
 
 .logo{
 
-    color:white;
+    color:#355125;
 
-    font-size:34px;
-    font-weight:bold;
+    font-size:40px;
+
+    font-weight:800;
 }
 
 .logo span{
 
-    color:#C8A96B;
+    color:#7BAE52;
 }
 
-/* Back */
+/* =========================
+BACK BUTTON
+========================= */
 
 .back-btn{
 
     text-decoration:none;
 
-    color:#CBD5E1;
+    color:#7BAE52;
 
     font-size:15px;
+
+    font-weight:700;
 
     transition:0.3s;
 }
 
 .back-btn:hover{
 
-    color:white;
+    transform:translateX(-4px);
+
+    color:#5E8D3C;
 }
 
-/* Container */
+/* =========================
+FORM WRAPPER
+========================= */
 
 .form-wrapper{
 
@@ -86,143 +159,241 @@ body{
     display:flex;
     justify-content:center;
 
-    padding:60px 20px;
+    padding:70px 20px;
+
+    position:relative;
+
+    z-index:2;
 }
 
-/* Form */
+/* =========================
+FORM BOX
+========================= */
 
 .form-box{
 
     width:100%;
-    max-width:780px;
+    max-width:820px;
 
-    background:#162033;
+    background:rgba(255,255,255,0.74);
 
-    border:1px solid #23314F;
+    backdrop-filter:blur(18px);
 
-    border-radius:30px;
+    border:1px solid rgba(123,174,82,0.16);
 
-    padding:40px;
+    border-radius:38px;
+
+    padding:50px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.08);
 }
 
-/* Title */
+/* =========================
+TITLE
+========================= */
 
 .form-title{
 
-    font-size:38px;
+    font-size:52px;
 
-    margin-bottom:35px;
+    margin-bottom:38px;
+
+    color:#243220;
+
+    font-weight:800;
 }
 
-/* Group */
+/* =========================
+GROUP
+========================= */
 
 .form-group{
 
-    margin-bottom:22px;
+    margin-bottom:24px;
 }
 
-/* Label */
+/* =========================
+LABEL
+========================= */
 
 .form-group label{
 
     display:block;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
-    color:#CBD5E1;
+    color:#5D7150;
 
-    font-size:14px;
+    font-size:15px;
+
+    font-weight:700;
 }
 
-/* Input */
+/* =========================
+INPUT
+========================= */
 
 .form-group input{
 
     width:100%;
 
-    height:58px;
+    height:60px;
 
     border:none;
 
     outline:none;
 
-    background:#0F172A;
+    background:#F3F7EE;
 
-    color:white;
+    border:1px solid #DDE8CF;
 
-    border-radius:16px;
+    color:#243220;
 
-    padding:0 18px;
+    border-radius:18px;
+
+    padding:0 20px;
 
     font-size:15px;
+
+    transition:0.3s;
 }
 
-/* File Input */
+/* =========================
+FOCUS
+========================= */
+
+.form-group input:focus{
+
+    border:1px solid #7BAE52;
+
+    box-shadow:
+    0 0 0 5px rgba(123,174,82,0.10);
+}
+
+/* =========================
+FILE INPUT
+========================= */
 
 .form-group input[type="file"]{
 
-    padding:15px;
+    padding:16px;
 
     height:auto;
+
+    background:#EDF4E4;
+
+    cursor:pointer;
 }
 
-/* Preview */
+/* =========================
+PREVIEW IMAGE
+========================= */
 
 .preview-image{
 
     width:100%;
 
-    height:300px;
+    height:340px;
 
     object-fit:cover;
 
-    border-radius:20px;
+    border-radius:28px;
 
-    margin-bottom:20px;
+    margin-bottom:28px;
 
-    border:1px solid #23314F;
+    border:1px solid #DDE8CF;
+
+    box-shadow:
+    0 18px 40px rgba(0,0,0,0.08);
 }
 
-/* Disabled */
+/* =========================
+DISABLED
+========================= */
 
 .form-group input:disabled{
 
-    opacity:0.7;
+    background:#E7EFDD;
+
+    color:#708063;
 
     cursor:not-allowed;
 }
 
-/* Button */
+/* =========================
+BUTTON
+========================= */
 
 .submit-btn{
 
     width:100%;
 
-    height:58px;
+    height:62px;
 
-    margin-top:20px;
+    margin-top:30px;
 
-    background:#C8A96B;
+    background:#7BAE52;
 
-    color:#0F172A;
+    color:white;
 
     border:none;
 
-    border-radius:18px;
+    border-radius:22px;
 
-    font-size:16px;
-    font-weight:bold;
+    font-size:17px;
+
+    font-weight:700;
 
     cursor:pointer;
 
     transition:0.3s;
+
+    box-shadow:
+    0 14px 30px rgba(123,174,82,0.20);
 }
 
 .submit-btn:hover{
 
-    background:#b89255;
+    background:#689844;
 
-    transform:scale(1.02);
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 18px 34px rgba(123,174,82,0.24);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .navbar{
+
+        padding:0 25px;
+    }
+
+    .logo{
+
+        font-size:32px;
+    }
+
+    .form-box{
+
+        padding:35px 25px;
+    }
+
+    .form-title{
+
+        font-size:38px;
+    }
+
+    .preview-image{
+
+        height:240px;
+    }
+
 }
 
 </style>

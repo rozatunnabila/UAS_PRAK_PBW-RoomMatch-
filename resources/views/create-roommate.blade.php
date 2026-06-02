@@ -19,70 +19,140 @@
 
 body{
 
-    background:#0B1120;
+    background:#EEF3E6;
 
     font-family:Arial,sans-serif;
 
-    padding:50px;
+    min-height:100vh;
 
-    color:white;
+    padding:70px 20px;
+
+    position:relative;
+
+    overflow-x:hidden;
 }
+
+/* =========================
+BACKGROUND EFFECT
+========================= */
+
+body::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    background:
+    radial-gradient(
+        rgba(123,174,82,0.16),
+        transparent 70%
+    );
+
+    top:-250px;
+    right:-150px;
+
+    z-index:0;
+}
+
+body::after{
+
+    content:'';
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:
+    radial-gradient(
+        rgba(123,174,82,0.10),
+        transparent 70%
+    );
+
+    bottom:-180px;
+    left:-120px;
+
+    z-index:0;
+}
+
+/* =========================
+CONTAINER
+========================= */
 
 .container{
 
-    max-width:700px;
+    max-width:760px;
 
     margin:auto;
 
-    background:#162033;
+    background:rgba(255,255,255,0.74);
 
-    padding:40px;
+    backdrop-filter:blur(18px);
 
-    border-radius:25px;
+    border:1px solid rgba(123,174,82,0.16);
 
-    border:1px solid #23314F;
+    padding:50px;
+
+    border-radius:36px;
+
+    position:relative;
+
+    z-index:2;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.08);
 }
+
+/* =========================
+TITLE
+========================= */
 
 h1{
 
-    margin-bottom:30px;
+    margin-bottom:35px;
 
-    font-size:40px;
+    font-size:48px;
+
+    color:#243220;
+
+    font-weight:800;
 }
+
+/* =========================
+FORM GROUP
+========================= */
 
 .form-group{
 
-    margin-bottom:20px;
+    margin-bottom:24px;
 }
+
+/* =========================
+LABEL
+========================= */
 
 label{
 
     display:block;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
-    color:#CBD5E1;
+    color:#5D7150;
+
+    font-weight:700;
+
+    font-size:15px;
 }
+
+/* =========================
+INPUT & SELECT
+========================= */
 
 input,
 select{
-
-    width:100%;
-
-    padding:16px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:#0F172A;
-
-    color:white;
-
-    outline:none;
-}
-
-button{
 
     width:100%;
 
@@ -90,27 +160,125 @@ button{
 
     border:none;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    background:#C8A96B;
+    background:#F3F7EE;
 
-    color:#0F172A;
+    border:1px solid #DDE8CF;
 
-    font-size:16px;
-    font-weight:bold;
+    color:#243220;
 
-    cursor:pointer;
+    outline:none;
 
-    margin-top:20px;
+    font-size:15px;
 
     transition:0.3s;
 }
 
-button:hover{
+/* FOCUS */
 
-    background:#b89255;
+input:focus,
+select:focus{
+
+    border:1px solid #7BAE52;
+
+    box-shadow:
+    0 0 0 5px rgba(123,174,82,0.10);
 }
 
+/* =========================
+FILE INPUT
+========================= */
+
+input[type="file"]{
+
+    padding:14px;
+
+    background:#EDF4E4;
+
+    cursor:pointer;
+}
+
+/* =========================
+READONLY INPUT
+========================= */
+
+input[readonly]{
+
+    background:#E8F0DD !important;
+
+    color:#6B7D5E;
+
+    cursor:not-allowed;
+}
+
+/* =========================
+BUTTON
+========================= */
+
+button{
+
+    width:100%;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:#7BAE52;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    margin-top:30px;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 14px 28px rgba(123,174,82,0.18);
+}
+
+/* HOVER */
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    background:#699845;
+
+    box-shadow:
+    0 18px 34px rgba(123,174,82,0.24);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    body{
+
+        padding:40px 16px;
+    }
+
+    .container{
+
+        padding:35px 25px;
+    }
+
+    h1{
+
+        font-size:38px;
+    }
+
+}
+    
 </style>
 
 </head>
