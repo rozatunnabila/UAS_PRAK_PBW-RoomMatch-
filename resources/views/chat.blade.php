@@ -16,7 +16,7 @@
 }
 
 body{
-background:
+background:#EEF3E6;
 linear-gradient(
 135deg,
 #4A001F 0%,
@@ -48,11 +48,9 @@ linear-gradient(
 
     width:340px;
 
-   backbackground:rgba(255,255,255,0.05);
+    background:#F6FAF1;
 
-    backdrop-filter:blur(18px);
-
-    border-right:1px solid rgba(255,215,160,0.12);
+    border-right:1px solid #DDE8CF;
 
     display:flex;
     flex-direction:column;
@@ -64,28 +62,22 @@ linear-gradient(
 
     padding:28px 30px;
 
-    font-size:32px;
-    font-weight:bold;
+    font-size:34px;
 
-   border-bottom:1px solid rgba(255,215,160,0.10);
+    font-weight:800;
+
+    border-bottom:1px solid #E3ECD8;
 
     text-decoration:none;
 
-    color:white;
+    color:#355125;
 
     display:block;
-
-    transition:0.3s;
-}
-
-.logo:hover{
-
-    background:rgba(255,255,255,0.04);
 }
 
 .logo span{
 
-    color:#F0C36D;
+    color:#7BAE52;
 }
 
 /* SEARCH */
@@ -102,15 +94,13 @@ linear-gradient(
 
     gap:10px;
 
-    background:rgba(255,255,255,0.08);
+    background:#EDF4E4;
 
-    border:1px solid rgba(255,215,160,0.14);
-
-    backdrop-filter:blur(12px);
+    border:1px solid #DDE8CF;
 
     padding:14px 16px;
 
-    border-radius:16px;
+    border-radius:18px;
 }
 
 .search-box input{
@@ -123,7 +113,7 @@ linear-gradient(
 
     outline:none;
 
-    color:white;
+    color:#355125;
 
     font-size:14px;
 }
@@ -168,27 +158,27 @@ linear-gradient(
 
     padding:15px;
 
-    border-radius:18px;
+    border-radius:20px;
 
     cursor:pointer;
 
     transition:0.3s;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
     text-decoration:none;
 }
 
 .chat-item:hover{
 
-    background:rgba(255,255,255,0.06);
+    background:#EDF4E4;
 }
 
 .chat-item.active{
 
-    background:rgba(255,255,255,0.08);
+    background:#E4F0D6;
 
-    border:1px solid rgba(255,215,160,0.18);
+    border:1px solid #D3E2C1;
 }
 
 /* Avatar */
@@ -218,12 +208,12 @@ linear-gradient(
 
     font-size:17px;
 
-    color:white;
+    color:#243220;
 }
 
 .chat-info p{
 
-    color:#E8CFCF;
+    color:#718166;
 
     font-size:14px;
 }
@@ -270,11 +260,11 @@ linear-gradient(
 
     min-height:90px;
 
-    background:rgba(255,255,255,0.05);
+    background:rgba(255,255,255,0.72);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:blur(16px);
 
-    border-bottom:1px solid rgba(255,215,160,0.10);
+    border-bottom:1px solid #DDE8CF;
 
     padding:0 30px;
 
@@ -307,31 +297,40 @@ linear-gradient(
 
     margin-bottom:5px;
 
-    font-size:26px;
+    font-size:28px;
+
+    color:#243220;
 }
 
 .chat-user p{
 
-    color:#E8CFCF;
+    color:#7BAE52;
 
     font-size:14px;
+
+    font-weight:600;
 }
 
 /* Match Button */
 
 .match-btn{
-    background:#E0B15C;
-    color:#4A001F;
+
+    background:#7BAE52;
+
+    color:white;
 
     border:none;
 
-    padding:14px 28px;
+    padding:14px 30px;
 
-    border-radius:16px;
+    border-radius:18px;
 
     font-weight:bold;
 
     cursor:pointer;
+
+    box-shadow:
+    0 10px 24px rgba(123,174,82,0.18);
 }
 
 /* MATCH NOTIFICATION */
@@ -408,7 +407,7 @@ linear-gradient(
 
     flex:1;
 
-    padding:30px;
+    padding:35px;
 
     overflow-y:auto;
 
@@ -416,6 +415,8 @@ linear-gradient(
     flex-direction:column;
 
     gap:18px;
+
+    background:#EEF3E6;
 }
 
 /* Message */
@@ -450,26 +451,25 @@ linear-gradient(
 
 .receiver{
 
-   background:rgba(255,255,255,0.08);
+    background:white;
 
-    backdrop-filter:blur(10px);
+    border:1px solid #DDE8CF;
 
-    border:1px solid rgba(255,215,160,0.10);
+    color:#243220;
 
-    color:white;
+    border-bottom-left-radius:6px;
 
-    border-bottom-left-radius:5px;
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.04);
 }
-
-/* Input Area */
 
 .chat-input{
 
-   background:rgba(255,255,255,0.05);
+    background:rgba(255,255,255,0.78);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:blur(16px);
 
-    border-top:1px solid rgba(255,215,160,0.10);
+    border-top:1px solid #DDE8CF;
 
     padding:20px;
 
@@ -485,17 +485,15 @@ linear-gradient(
 
     flex:1;
 
-    background:rgba(255,255,255,0.08);
+    background:#EDF4E4;
 
-    border:1px solid rgba(255,215,160,0.12);
-
-    border:none;
+    border:1px solid #DDE8CF;
 
     border-radius:18px;
 
     padding:18px;
 
-    color:white;
+    color:#243220;
 
     outline:none;
 
@@ -513,11 +511,14 @@ linear-gradient(
 
     border-radius:18px;
 
-    background:#E0B15C;
+    background:#7BAE52;
 
-    color:#0F172A;
+    color:white;
 
     cursor:pointer;
+
+    box-shadow:
+    0 10px 24px rgba(123,174,82,0.18);
 }
 
 /* POPUP OVERLAY */
