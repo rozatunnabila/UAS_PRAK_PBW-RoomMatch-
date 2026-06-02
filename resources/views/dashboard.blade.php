@@ -16,483 +16,258 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
-    background:#0B1120;
+    font-family:Arial,sans-serif;
+    background:#EEF3E6;
+    color:#243220;
 }
 
-/* Navbar */
+/* =========================
+NAVBAR
+========================= */
+
+/* =========================
+NAVBAR FIX CLEAN
+HAPUS SEMUA CSS NAVBAR LAMA
+LALU GANTI FULL DENGAN INI
+========================= */
 
 .navbar{
 
-    width:100%;
-    height:90px;
+    position:fixed;
 
-    background:#0F172A;
+    top:22px;
 
-    border-bottom:1px solid #1E293B;
+    left:50%;
 
-    padding:0 60px;
+    transform:translateX(-50%);
+
+    width:95%;
+
+    max-width:1320px;
+
+    height:82px;
+
+    background:rgba(255,255,255,0.94);
+
+    backdrop-filter:blur(16px);
+
+    border-radius:26px;
+
+    padding:0 38px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
-    position:sticky;
-    top:0;
+    z-index:99999;
 
-    z-index:999;
+    box-shadow:
+    0 12px 35px rgba(0,0,0,0.12);
 }
 
-/* Left */
+/* =========================
+LEFT
+========================= */
 
 .left-navbar{
-    width:20%;
-}
-
-/* Center */
-
-.center-navbar{
-
-    width:60%;
 
     display:flex;
-    justify-content:center;
+
+    align-items:center;
+
+    z-index:2;
 }
 
-/* Right */
-
-.right-navbar{
-
-    width:20%;
-
-    display:flex;
-    justify-content:flex-end;
-}
-
-/* Logo */
+/* =========================
+LOGO
+========================= */
 
 .logo{
 
-    color:white;
+    font-size:40px;
 
-    font-size:34px;
-    font-weight:bold;
+    font-weight:800;
+
+    color:#355125;
 }
 
 .logo span{
-    color:#C8A96B;
+
+    color:#7BAE52;
 }
 
-/* MATCH NOTIFICATION */
+/* =========================
+CENTER
+========================= */
+
+.center-navbar{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+}
+
+/* =========================
+MENU
+========================= */
+
+.menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+}
+
+/* =========================
+MENU ITEM
+========================= */
+
+.menu a{
+
+    position:relative;
+
+    text-decoration:none;
+
+    color:#243220;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    padding:12px 24px;
+
+    border-radius:18px;
+
+    transition:0.3s;
+}
+
+/* HOVER */
+
+.menu a:hover{
+
+    background:#E7F1DB;
+
+    color:#7BAE52;
+}
+
+/* ACTIVE */
+
+.menu a.active{
+
+    background:#7BAE52;
+
+    color:white;
+
+    box-shadow:
+    0 8px 20px rgba(123,174,82,0.25);
+}
+
+/* ACTIVE DOT */
+
+.menu a.active::after{
+
+    content:'';
+
+    position:absolute;
+
+    left:50%;
+    bottom:-8px;
+
+    transform:translateX(-50%);
+
+    width:7px;
+    height:7px;
+
+    background:#7BAE52;
+
+    border-radius:50%;
+}
+
+/* =========================
+RIGHT
+========================= */
+
+.right-navbar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-left:auto;
+
+    z-index:2;
+}
+
+/* =========================
+MATCH NOTIF
+========================= */
 
 .match-notif{
 
-    background:#C8A96B;
+    background:#7BAE52;
 
-    color:#0F172A;
+    color:white;
 
     padding:10px 14px;
 
     border-radius:14px;
 
-    font-weight:700;
-
     text-decoration:none;
 
+    font-weight:bold;
+
+    box-shadow:
+    0 8px 20px rgba(123,174,82,0.28);
+
     transition:0.3s;
-
-    margin-right:14px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
 }
 
 .match-notif:hover{
 
     transform:translateY(-2px);
 
-    background:#E0BC76;
+    background:#679944;
 }
 
-/* Username */
+/* =========================
+USERNAME
+========================= */
 
 .username{
 
-    background:#162033;
-    color:white;
-
-    padding:12px 20px;
-
-    border-radius:14px;
-
-    font-size:14px;
-}
-
-/* Menu */
-
-.menu{
-
-    display:flex;
-    align-items:center;
-
-    gap:45px;
-}
-
-.menu a{
-
-    text-decoration:none;
-
-    color:#CBD5E1;
-
-    font-weight:500;
-
-    position:relative;
-
-    transition:0.3s;
-}
-
-.menu a:hover{
-    color:white;
-}
-
-.menu a::after{
-
-    content:'';
-
-    position:absolute;
-
-    left:0;
-    bottom:-8px;
-
-    width:0%;
-    height:2px;
-
-    background:#C8A96B;
-
-    transition:0.3s;
-}
-
-.menu a:hover::after{
-    width:100%;
-}
-
-.menu .active{
-    color:#C8A96B;
-}
-
-.menu .active::after{
-    width:100%;
-}
-
-/* Content */
-
-.content{
-    padding:50px 60px;
-}
-
-/* Header */
-
-.header{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:50px;
-}
-
-/* Header Left */
-
-.header-left h2{
+    background:#7BAE52;
 
     color:white;
 
-    font-size:54px;
-
-    margin-bottom:10px;
-}
-
-.header-left p{
-
-    color:#94A3B8;
-
-    font-size:18px;
-}
-
-/* Search */
-
-.search-box{
-
-    width:420px;
-
-    display:flex;
-    align-items:center;
-
-    background:#162033;
-
-    border:1px solid #23314F;
+    padding:12px 24px;
 
     border-radius:18px;
 
-    overflow:hidden;
+    font-size:14px;
+
+    font-weight:700;
+
+    box-shadow:
+    0 8px 18px rgba(123,174,82,0.22);
 }
 
-.search-box input{
-
-    width:100%;
-
-    background:none;
-    border:none;
-
-    color:white;
-
-    padding:18px 22px;
-
-    outline:none;
-
-    font-size:15px;
-}
-
-.search-box input::placeholder{
-    color:#94A3B8;
-}
-
-/* Search Button */
-
-.search-btn{
-
-    width:65px;
-    height:58px;
-
-    background:transparent;
-
-    color:#94A3B8;
-
-    border:none;
-
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transition:0.3s;
-}
-
-.search-btn:hover{
-    color:white;
-}
-
-/* Cards */
-
-.card-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:30px;
-}
-
-/* Card */
-
-.card{
-
-    background:#162033;
-
-    border:1px solid #23314F;
-
-    border-radius:28px;
-
-    overflow:hidden;
-
-    transition:0.3s;
-}
-
-.card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-/* Image */
-
-.profile-image{
-
-    width:100%;
-    height:260px;
-
-    object-fit:cover;
-}
-
-/* Card Content */
-
-.card-content{
-    padding:25px;
-}
-
-/* Name */
-
-.card-content h3{
-
-    color:white;
-
-    font-size:28px;
-
-    margin-bottom:8px;
-}
-
-/* Gender */
-
-.gender-age{
-
-    color:#C8A96B;
-
-    font-size:15px;
-
-    margin-bottom:22px;
-}
-
-/* Info */
-
-.info-list{
-
-    display:flex;
-    flex-direction:column;
-
-    gap:12px;
-
-    margin-bottom:25px;
-}
-
-.info-list p{
-
-    color:#CBD5E1;
-
-    font-size:15px;
-}
-
-/* Budget */
-
-.budget small{
-    color:#94A3B8;
-}
-
-.budget h4{
-
-    color:#C8A96B;
-
-    font-size:24px;
-
-    margin-top:6px;
-}
-
-/* Button */
-
-.match-btn{
-
-    width:100%;
-
-    margin-top:25px;
-
-    background:#C8A96B;
-    color:#0F172A;
-
-    border:none;
-
-    border-radius:16px;
-
-    padding:16px;
-
-    font-size:16px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:0.3s;
-
-    text-decoration:none;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.match-btn:hover{
-
-    background:#b89255;
-
-    transform:scale(1.02);
-}
-
-/* Floating Button */
-
-.add-btn{
-
-    position:fixed;
-
-    right:35px;
-    bottom:35px;
-
-    width:75px;
-    height:75px;
-
-    background:#C8A96B;
-    color:#0F172A;
-
-    border-radius:50%;
-
-    text-decoration:none;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:42px;
-    font-weight:bold;
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
-
-    transition:0.3s;
-
-    z-index:999;
-}
-
-.add-btn:hover{
-
-    transform:scale(1.1);
-
-    background:#b89255;
-}
-
-/* Empty */
-
-.empty{
-
-    background:#162033;
-
-    color:white;
-
-    padding:30px;
-
-    border-radius:20px;
-}
-
-/* Responsive */
-
-@media(max-width:992px){
-
-    .card-container{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:768px){
 
     .navbar{
+
+        width:94%;
 
         height:auto;
 
@@ -503,37 +278,1180 @@ body{
         gap:20px;
     }
 
-    .left-navbar,
-    .center-navbar,
+    .center-navbar{
+
+        position:static;
+
+        transform:none;
+    }
+
     .right-navbar{
 
-        width:100%;
+        margin-left:0;
+    }
+
+    .menu{
+
+        flex-wrap:wrap;
 
         justify-content:center;
     }
 
-    .header{
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+
+    width:100%;
+
+    min-height:920px;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.28),
+        rgba(0,0,0,0.40)
+    ),
+    url('{{ asset("images/hero-kos.jpeg") }}');
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+
+    padding:
+    220px 70px 150px;
+
+    display:flex;
+
+    align-items:center;
+}
+
+/* =========================
+HERO CONTENT
+========================= */
+
+.hero-content{
+
+    max-width:700px;
+}
+
+/* =========================
+HERO LAYOUT
+========================= */
+
+.hero{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:60px;
+}
+
+/* =========================
+HERO LEFT
+========================= */
+
+.hero-content{
+
+    flex:1;
+
+    max-width:650px;
+}
+
+/* =========================
+HERO RIGHT
+========================= */
+
+.hero-image-wrapper{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+/* =========================
+IMAGE CARD
+========================= */
+
+.hero-image-card{
+
+    width:100%;
+
+    max-width:620px;
+
+    height:520px;
+
+    border-radius:40px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,0.25);
+}
+
+/* =========================
+IMAGE
+========================= */
+
+.hero-image{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+/* =========================
+OVERLAY
+========================= */
+
+.hero-image-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.08)
+    );
+
+    padding:40px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+}
+
+/* =========================
+BADGE
+========================= */
+
+.hero-mini-badge{
+
+    width:max-content;
+
+    background:rgba(123,174,82,0.85);
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    margin-bottom:18px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    backdrop-filter:blur(10px);
+}
+
+/* =========================
+IMAGE TITLE
+========================= */
+
+.hero-image-overlay h3{
+
+    color:white;
+
+    font-size:42px;
+
+    margin-bottom:14px;
+
+    text-shadow:
+    0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* =========================
+IMAGE TEXT
+========================= */
+
+.hero-image-overlay p{
+
+    color:#F3F3F3;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    max-width:420px;
+}
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:rgba(164,208,125,0.20);
+
+    border:1px solid rgba(255,255,255,0.18);
+
+    backdrop-filter:blur(12px);
+
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:40px;
+
+    margin-bottom:24px;
+
+    font-size:14px;
+}
+
+.hero-content h1{
+
+    color:white;
+
+    font-size:88px;
+
+    line-height:1.08;
+
+    margin-bottom:28px;
+
+    text-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+}
+
+.hero-content p{
+
+    color:#F2F2F2;
+
+    font-size:22px;
+
+    line-height:1.9;
+
+    margin-bottom:42px;
+
+    max-width:650px;
+}
+
+/* =========================
+HERO BUTTON
+========================= */
+
+.hero-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:190px;
+    height:60px;
+
+    background:#7BAE52;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:40px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 10px 24px rgba(123,174,82,0.30);
+
+    transition:0.3s;
+}
+
+.hero-btn:hover{
+
+    transform:translateY(-3px);
+
+    background:#679944;
+}
+
+/* =========================
+SEARCH FLOAT
+========================= */
+
+.search-wrapper{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:-75px;
+
+    position:relative;
+
+    z-index:999;
+}
+
+.search-box{
+
+    width:980px;
+
+    background:#D9E8C7;
+
+    border-radius:80px;
+
+    padding:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:
+    0 18px 40px rgba(0,0,0,0.18);
+}
+
+.search-box input{
+
+    flex:1;
+
+    height:65px;
+
+    border:none;
+
+    border-radius:40px;
+
+    padding:0 25px;
+
+    outline:none;
+
+    font-size:15px;
+
+    color:#243220;
+}
+
+.search-btn{
+
+    width:170px;
+    height:65px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#7BAE52;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.search-btn:hover{
+
+    background:#679944;
+}
+
+/* =========================
+CONTENT
+========================= */
+
+.content{
+
+    padding:90px 70px;
+}
+
+/* =========================
+SECTION TITLE
+========================= */
+
+.section-title{
+
+    font-size:42px;
+
+    margin-bottom:14px;
+
+    color:#243220;
+}
+
+.section-desc{
+
+    color:#6A7863;
+
+    margin-bottom:50px;
+
+    line-height:1.7;
+}
+
+/* =========================
+OWNER CARD
+========================= */
+
+.owner-wrapper{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:70px;
+}
+
+.owner-card{
+
+    width:850px;
+
+    min-height:320px;
+
+    background:white;
+
+    border-radius:38px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    box-shadow:
+    0 18px 45px rgba(0,0,0,0.12);
+
+    border:4px solid #A4D07D;
+
+    position:relative;
+}
+    
+.owner-badge{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    background:#7BAE52;
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:40px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    z-index:10;
+}
+
+.owner-image{
+
+    width:45%;
+
+    height:320px;
+
+    object-fit:cover;
+}
+
+.owner-content{
+
+    flex:1;
+
+    padding:40px;
+}
+
+.owner-content h2{
+
+    font-size:52px;
+
+    margin-bottom:16px;
+
+    color:#243220;
+}
+
+.owner-content p{
+
+    color:#6A7863;
+
+    margin-bottom:10px;
+}
+
+.owner-content .edit-btn{
+
+    width:220px;
+
+    margin-top:35px;
+}
+
+/* =========================
+SMALL CARD
+========================= */
+
+.card{
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    background:white;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+
+    transition:0.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+}
+
+.profile-image{
+
+    width:100%;
+    height:190px;
+
+    object-fit:cover;
+}
+
+.card-content{
+
+    padding:22px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+}
+
+.card-content h3{
+
+    font-size:22px;
+
+    margin-bottom:8px;
+
+    color:#243220;
+}
+
+.gender-age{
+
+    color:#7BAE52;
+
+    font-weight:bold;
+
+    margin-bottom:14px;
+}
+
+.location{
+
+    color:#5B6856;
+
+    margin-bottom:20px;
+}
+
+/* =========================
+BUTTON GROUP
+========================= */
+
+.button-group{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.chat-btn,
+.detail-btn{
+
+    flex:1;
+
+    min-width:0;
+
+    height:50px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.chat-btn{
+
+    background:#7BAE52;
+
+    color:white;
+}
+
+.chat-btn:hover{
+
+    background:#679944;
+}
+
+.detail-btn{
+
+    background:#DCE9CF;
+
+    color:#355125;
+}
+
+.detail-btn:hover{
+
+    background:#CFE2BB;
+}
+
+.card-content h3{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+.location{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+/* =========================
+POPUP
+========================= */
+
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.55);
+
+    backdrop-filter:blur(6px);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:99999;
+}
+
+.popup-content{
+
+    width:500px;
+
+    background:white;
+
+    border-radius:34px;
+
+    overflow:hidden;
+
+    animation:popupShow 0.3s ease;
+}
+
+.popup-image{
+
+    width:100%;
+    height:280px;
+
+    object-fit:cover;
+}
+
+.popup-body{
+
+    padding:30px;
+}
+
+.popup-body h2{
+
+    font-size:36px;
+
+    margin-bottom:10px;
+
+    color:#243220;
+}
+
+.popup-body p{
+
+    color:#5B6856;
+
+    margin-bottom:14px;
+
+    line-height:1.7;
+}
+
+.close-popup{
+
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:18px;
+
+    margin-top:20px;
+
+    background:#7BAE52;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+@keyframes popupShow{
+
+    from{
+
+        opacity:0;
+        transform:scale(0.9);
+    }
+
+    to{
+
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* =========================
+CARD CONTAINER
+========================= */
+
+.card-container{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:28px;
+
+    margin-top:30px;
+}
+
+/* =========================
+CARD
+========================= */
+
+.card{
+
+    width:320px;
+
+    min-height:380px;
+
+    background:white;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+
+    transition:0.3s;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 18px 40px rgba(0,0,0,0.12);
+}
+
+/* =========================
+FIRST CARD USER
+========================= */
+
+.own-card{
+
+    border:3px solid #A4D07D;
+
+    position:relative;
+}
+
+.own-card::before{
+
+    content:'Postingan Kamu';
+
+    position:absolute;
+
+    top:18px;
+    left:18px;
+
+    background:#7BAE52;
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    z-index:10;
+}
+
+/* =========================
+IMAGE
+========================= */
+
+.profile-image{
+
+    width:100%;
+    height:170px;
+
+    object-fit:cover;
+}
+
+/* =========================
+CARD CONTENT
+========================= */
+
+.card-content{
+
+    padding:28px;
+}
+
+.card-content h3{
+
+    font-size:32px;
+
+    margin-bottom:10px;
+
+    color:#243220;
+}
+
+.gender-age{
+
+    color:#7BAE52;
+
+    font-weight:bold;
+
+    margin-bottom:24px;
+}
+
+/* =========================
+INFO LIST
+========================= */
+
+.info-list{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:14px;
+
+    margin-bottom:30px;
+}
+
+.info-list p{
+
+    color:#5B6856;
+
+    line-height:1.6;
+}
+
+/* =========================
+BUDGET
+========================= */
+
+.budget small{
+
+    color:#7B8A74;
+}
+
+.budget h4{
+
+    margin-top:8px;
+
+    color:#7BAE52;
+
+    font-size:28px;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.match-btn,
+.edit-btn{
+
+    width:100%;
+
+    height:60px;
+
+    margin-top:28px;
+
+    border:none;
+
+    border-radius:18px;
+
+    text-decoration:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.match-btn{
+
+    background:#7BAE52;
+
+    color:white;
+}
+
+.match-btn:hover{
+
+    background:#679944;
+
+    transform:translateY(-2px);
+}
+
+.edit-btn{
+
+    background:#DCE9CF;
+
+    color:#355125;
+}
+
+.edit-btn:hover{
+
+    background:#CFE2BB;
+
+    transform:translateY(-2px);
+}
+
+/* =========================
+FLOAT BUTTON
+========================= */
+
+.add-btn{
+
+    position:fixed;
+
+    right:35px;
+    bottom:35px;
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    background:#7BAE52;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:44px;
+    font-weight:bold;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+    0 14px 35px rgba(123,174,82,0.35);
+
+    transition:0.3s;
+
+    z-index:999;
+}
+
+.add-btn:hover{
+
+    transform:scale(1.08);
+
+    background:#679944;
+}
+
+/* =========================
+EMPTY
+========================= */
+
+.empty{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:24px;
+
+    color:#355125;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+    .card-container{
+
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .hero-content h1{
+
+        font-size:58px;
+    }
+
+}
+
+/* =========================
+TABLET & MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .navbar{
+
+        width:94%;
+
+        height:auto;
+
+        padding:20px;
 
         flex-direction:column;
 
-        align-items:flex-start;
+        gap:20px;
+    }
 
-        gap:25px;
+    .center-navbar{
+
+        position:static;
+
+        transform:none;
+    }
+
+    .right-navbar{
+
+        margin-left:0;
+    }
+
+    .menu{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .hero{
+
+        min-height:780px;
+
+        padding:180px 25px 120px;
+
+        flex-direction:column;
+
+        gap:50px;
+    }
+
+    .hero-content h1{
+
+        font-size:52px;
+    }
+
+    .search-wrapper{
+
+        margin-top:-40px;
     }
 
     .search-box{
+
+        width:92%;
+
+        flex-direction:column;
+
+        border-radius:30px;
+    }
+
+    .search-box input,
+    .search-btn{
+
         width:100%;
     }
 
     .content{
-        padding:30px 20px;
-    }
 
-    .header-left h2{
-        font-size:40px;
+        padding:70px 25px;
     }
 
     .card-container{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .owner-card{
+
+        flex-direction:column;
+
+        width:100%;
+    }
+
+    .owner-image{
+
+        width:100%;
+
+        height:240px;
+    }
+
+    .hero-image-card{
+
+        height:360px;
+    }
+
+}
+
+/* =========================
+SMALL MOBILE
+========================= */
+
+@media(max-width:520px){
+
+    .card-container{
+
         grid-template-columns:1fr;
     }
 
@@ -565,38 +1483,38 @@ body{
 
             <a href="/chat-list" style="position:relative;">
 
-    Chat
+                Chat
 
-    @if($chatNotif > 0)
+                @if($chatNotif > 0)
 
-        <span style="
-            position:absolute;
-            top:-10px;
-            right:-18px;
+                    <span style="
+                        position:absolute;
+                        top:-10px;
+                        right:-18px;
 
-            background:#EF4444;
-            color:white;
+                        background:#EF4444;
+                        color:white;
 
-            width:22px;
-            height:22px;
+                        width:22px;
+                        height:22px;
 
-            border-radius:50%;
+                        border-radius:50%;
 
-            display:flex;
-            align-items:center;
-            justify-content:center;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
 
-            font-size:12px;
-            font-weight:bold;
-        ">
+                        font-size:12px;
+                        font-weight:bold;
+                    ">
 
-            {{ $chatNotif }}
+                        {{ $chatNotif }}
 
-        </span>
+                    </span>
 
-    @endif
+                @endif
 
-</a>
+            </a>
 
             <a href="/profile">
                 Profile
@@ -608,150 +1526,251 @@ body{
 
     <div class="right-navbar">
 
-   @if($matchRequests->count() > 0 && $matchUser)
+        @if($matchRequests->count() > 0 && $matchUser)
 
-    <a href="/chat/{{ $matchUser->id }}" class="match-notif">
+            <a href="/chat/{{ $matchUser->id }}" class="match-notif">
 
-       🔔 {{ $matchRequests->count() }}
+                🔔 {{ $matchRequests->count() }}
 
-    </a>
+            </a>
 
-@endif
+        @endif
 
-    <div class="username">
+        <div class="username">
 
-        {{ Auth::user()->name }}
+            {{ Auth::user()->name }}
+
+        </div>
+
+    </div>
+
+</nav>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            🌿 Temukan roommate nyaman
+        </div>
+
+        <h1>
+            Cari Teman Kos Dengan Mudah
+        </h1>
+
+        <p>
+            Temukan roommate yang cocok dengan gaya hidup,
+            lokasi, dan kebiasaanmu tanpa drama yang biasanya
+            muncul 2 minggu setelah pindahan.
+        </p>
+
+        <a href="/roommate/create" class="hero-btn">
+            Mulai Sekarang
+        </a>
+
+    </div>
+
+</section>
+
+<div class="search-wrapper">
+
+    <form action="/dashboard" method="GET" class="search-box">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Cari roommate, lokasi, kebiasaan..."
+            value="{{ request('search') }}">
+
+        <button type="submit" class="search-btn">
+
+            Cari
+
+        </button>
+
+    </form>
+
+</div>
+
+<div class="content">
+
+    {{-- CARD USER SENDIRI --}}
+    @php
+        $myRoom = $filteredRoommates->firstWhere('user_id', Auth::id());
+    @endphp
+
+    @if($myRoom)
+
+    <div class="owner-wrapper">
+
+        <div class="owner-card">
+
+            <div class="owner-badge">
+                Postingan Kamu
+            </div>
+
+            <img
+                src="{{ asset($myRoom->gambar) }}"
+                class="owner-image">
+
+            <div class="owner-content">
+
+                <h2>
+                    {{ $myRoom->judul }}
+                </h2>
+
+                <p>
+                    {{ $myRoom->gender }} • {{ $myRoom->umur }}
+                </p>
+
+                <p>
+                    📍 {{ $myRoom->lokasi }}
+                </p>
+
+                <a
+                    href="/roommate/edit/{{ $myRoom->id }}"
+                    class="edit-btn">
+
+                    Edit Iklan
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @endif
+
+    {{-- TITLE --}}
+    <h2 class="section-title">
+        Roommate Recommendation
+    </h2>
+
+    <p class="section-desc">
+        Pilih roommate yang paling cocok dengan preferensi dan gaya hidupmu.
+    </p>
+
+{{-- ROOMMATE LAIN --}}
+
+<div class="card-container">
+
+@forelse($filteredRoommates->where('user_id','!=',Auth::id()) as $roommate)
+
+<div class="card">
+
+    <img
+        src="{{ asset($roommate->gambar) }}"
+        class="profile-image">
+
+    <div class="card-content">
+
+        <h3>
+            {{ $roommate->judul }}
+        </h3>
+
+        <p class="gender-age">
+            {{ $roommate->gender }} • {{ $roommate->umur }}
+        </p>
+
+        <p class="location">
+            📍 {{ $roommate->lokasi }}
+        </p>
+
+        <div class="button-group">
+
+            <a
+                href="/chat/{{ $roommate->user_id }}"
+                class="chat-btn">
+
+                Chat
+
+            </a>
+
+            <button
+                class="detail-btn"
+                onclick="openPopup('popup{{ $roommate->id }}')">
+
+                Detail
+
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
-</nav>
+{{-- POPUP DETAIL --}}
 
-<div class="content">
+<div
+    class="popup"
+    id="popup{{ $roommate->id }}">
 
-    <div class="header">
+    <div class="popup-content">
 
-        <div class="header-left">
+        <img
+            src="{{ asset($roommate->gambar) }}"
+            class="popup-image">
+
+        <div class="popup-body">
 
             <h2>
-                Temukan Roommate Ideal
+                {{ $roommate->judul }}
             </h2>
 
             <p>
-                Cari teman sekamar yang cocok dengan gaya hidupmu.
+                {{ $roommate->gender }} • {{ $roommate->umur }}
             </p>
 
-        </div>
+            <p>
+                📍 {{ $roommate->lokasi }}
+            </p>
 
-        <form action="/dashboard" method="GET" class="search-box">
+            <p>
+                🎓 {{ $roommate->pekerjaan }}
+            </p>
 
-            <input
-                type="text"
-                name="search"
-                placeholder="Cari roommate, lokasi, kebiasaan..."
-                value="{{ request('search') }}">
+            <p>
+                🛏 {{ $roommate->roommate }}
+            </p>
 
-            <button type="submit" class="search-btn">
+            <p>
+                ✨ {{ $roommate->habit1 }}
+            </p>
 
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24">
+            <p>
+                ✨ {{ $roommate->habit2 }}
+            </p>
 
-                    <circle cx="11" cy="11" r="8"></circle>
+            <p>
+                💰 {{ $roommate->harga }}
+            </p>
 
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <button
+                class="close-popup"
+                onclick="closePopup('popup{{ $roommate->id }}')">
 
-                </svg>
+                Tutup
 
             </button>
 
-        </form>
+        </div>
 
     </div>
 
-    <div class="card-container">
+</div>
 
-        @forelse($filteredRoommates as $roommate)
+@empty
 
-            <div class="card">
+<div class="empty">
+    Roommate tidak ditemukan.
+</div>
 
-                <img
-                    src="{{ asset($roommate->gambar) }}"
-                    class="profile-image">
+@endforelse
 
-                <div class="card-content">
-
-                    <h3>
-                        {{ $roommate->judul }}
-                    </h3>
-
-                    <p class="gender-age">
-                        {{ $roommate->gender }} • {{ $roommate->umur }}
-                    </p>
-
-                    <div class="info-list">
-
-                        <p>
-                            📍 {{ $roommate->lokasi }}
-                        </p>
-
-                        <p>
-                            🎓 {{ $roommate->pekerjaan }}
-                        </p>
-
-                        <p>
-                            🛏 {{ $roommate->roommate }}
-                        </p>
-
-                        <p>
-                            ✨ {{ $roommate->habit1 }}
-                        </p>
-
-                        <p>
-                            ✨ {{ $roommate->habit2 }}
-                        </p>
-
-                    </div>
-
-                    <div class="budget">
-
-                        <small>
-                            Budget
-                        </small>
-
-                        <h4>
-                            {{ $roommate->harga }}
-                        </h4>
-
-                    </div>
-
-                    @if($roommate->user_id != Auth::id())
-
-                    <a href="/chat/{{ $roommate->user_id }}" class="match-btn">
-
-                        Chat
-
-                    </a>
-
-                    @endif
-
-                </div>
-
-            </div>
-
-        @empty
-
-            <div class="empty">
-                Roommate tidak ditemukan.
-            </div>
-
-        @endforelse
-
+</div>
     </div>
 
 </div>
@@ -759,6 +1778,20 @@ body{
 <a href="/roommate/create" class="add-btn">
     +
 </a>
+
+<script>
+
+function openPopup(id){
+
+    document.getElementById(id).style.display = "flex";
+}
+
+function closePopup(id){
+
+    document.getElementById(id).style.display = "none";
+}
+
+</script>
 
 </body>
 </html>

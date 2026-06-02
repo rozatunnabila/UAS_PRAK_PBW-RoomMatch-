@@ -64,75 +64,65 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | CHAT NOTIFICATION
+        |--------------------------------------------------------------------------
+        */
+
+        $chatNotif = Chat::where(
+
+                'receiver_id',
+                Auth::id()
+
+            )
+
+            ->where(
+
+                'is_read',
+                false
+
+            )
+
+            ->count();
+
+        /*
+        |--------------------------------------------------------------------------
         | MATCH REQUEST NOTIFICATION
         |--------------------------------------------------------------------------
         */
 
-       /*
-|--------------------------------------------------------------------------
-| MATCH REQUEST NOTIFICATION
-|--------------------------------------------------------------------------
-*/
-/*
-|--------------------------------------------------------------------------
-| CHAT NOTIFICATION
-|--------------------------------------------------------------------------
-*/
+        $matchRequests = RoomMatch::where(
 
-$chatNotif = Chat::where(
+                'receiver_id',
+                Auth::id()
 
-        'receiver_id',
-        Auth::id()
+            )
 
-    )
+            ->where('status', 'pending')
 
-    ->where(
+            ->latest()
 
-        'is_read',
-        false
+            ->get();
 
-    )
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL IKLAN PENGIRIM MATCH
+        |--------------------------------------------------------------------------
+        */
 
-    ->count();
-/*
-|--------------------------------------------------------------------------
-| MATCH REQUEST NOTIFICATION
-|--------------------------------------------------------------------------
-*/
+        $matchUser = null;
 
-$matchRequests = RoomMatch::where(
+        if($matchRequests->count() > 0){
 
-        'receiver_id',
-        Auth::id()
+            $matchUser = Iklan::where(
 
-    )
+                    'user_id',
+                    $matchRequests->first()->sender_id
 
-    ->where('status', 'pending')
+                )
 
-    ->latest()
+                ->first();
 
-    ->get();
-
-/*
-|--------------------------------------------------------------------------
-| AMBIL IKLAN PENGIRIM MATCH
-|--------------------------------------------------------------------------
-*/
-
-$matchUser = null;
-
-if($matchRequests->count() > 0){
-
-    $matchUser = Iklan::where(
-
-            'user_id',
-            $matchRequests->first()->sender_id
-
-        )
-
-        ->first();
-
-}
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -142,12 +132,12 @@ if($matchRequests->count() > 0){
 
         return view('dashboard', compact(
 
-    'filteredRoommates',
-    'matchRequests',
-    'matchUser',
-    'chatNotif'
+            'filteredRoommates',
+            'matchRequests',
+            'matchUser',
+            'chatNotif'
 
-));
+        ));
 
     }
 
@@ -215,7 +205,7 @@ if($matchRequests->count() > 0){
             |--------------------------------------------------------------------------
             */
 
-            'judul' => $request->name,
+           'judul' => $request->judul,
 
             'lokasi' => $request->lokasi,
 
@@ -244,6 +234,73 @@ if($matchRequests->count() > 0){
         | REDIRECT
         |--------------------------------------------------------------------------
         */
+
+        return redirect('/dashboard');
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | EDIT ROOMMATE
+    |--------------------------------------------------------------------------
+    */
+
+    public function edit($id)
+    {
+
+        $roommate = Iklan::findOrFail($id);
+
+        if($roommate->user_id != Auth::id()){
+
+            abort(403);
+
+        }
+
+        return view('edit-roommate', compact('roommate'));
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | UPDATE ROOMMATE
+    |--------------------------------------------------------------------------
+    */
+
+    public function update(Request $request, $id)
+    {
+
+        $roommate = Iklan::findOrFail($id);
+
+        if($roommate->user_id != Auth::id()){
+
+            abort(403);
+
+        }
+if($request->hasFile('image')){
+
+    $file = $request->file('image');
+
+    $filename = time() . '.' . $file->getClientOriginalExtension();
+
+    $file->move(public_path('uploads'), $filename);
+
+    $roommate->gambar = 'uploads/' . $filename;
+}
+        $roommate->judul = $request->judul;
+
+        $roommate->lokasi = $request->lokasi;
+
+        $roommate->pekerjaan = $request->pekerjaan;
+
+        $roommate->roommate = $request->roommate;
+
+        $roommate->habit1 = $request->habit1;
+
+        $roommate->habit2 = $request->habit2;
+
+        $roommate->harga = $request->harga;
+
+        $roommate->save();
 
         return redirect('/dashboard');
 

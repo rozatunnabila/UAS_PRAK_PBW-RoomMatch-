@@ -17,83 +17,170 @@
 
 body{
 
-    background:#0B1120;
+    background:
+    linear-gradient(
+        135deg,
+        #4A001F 0%,
+        #650024 45%,
+        #2B0010 100%
+    );
 
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 
     height:100vh;
 
     display:flex;
     align-items:center;
     justify-content:center;
+
+    overflow:hidden;
 }
+
+/* =========================
+EMPTY BOX
+========================= */
 
 .empty-box{
 
-    background:#162033;
+    width:430px;
 
-    border:1px solid #23314F;
+    background:rgba(255,255,255,0.06);
 
-    padding:50px;
+    backdrop-filter:blur(18px);
 
-    border-radius:28px;
+    border:1px solid rgba(255,215,160,0.14);
+
+    padding:55px 45px;
+
+    border-radius:34px;
 
     text-align:center;
 
-    width:420px;
+    box-shadow:
+    0 20px 60px rgba(0,0,0,0.28),
+    0 10px 35px rgba(255,215,160,0.06);
+
+    animation:popupShow 0.35s ease;
 }
+
+/* =========================
+ICON
+========================= */
+
+.icon{
+
+    width:110px;
+    height:110px;
+
+    margin:auto;
+    margin-bottom:28px;
+
+    border-radius:50%;
+
+    background:rgba(224,177,92,0.10);
+
+    border:1px solid rgba(224,177,92,0.14);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:50px;
+
+    box-shadow:
+    0 10px 30px rgba(224,177,92,0.12);
+}
+
+/* =========================
+TITLE
+========================= */
 
 .empty-box h1{
 
     color:white;
 
-    font-size:34px;
+    font-size:38px;
 
-    margin-bottom:14px;
+    margin-bottom:16px;
+
+    text-shadow:
+    0 4px 16px rgba(0,0,0,0.18);
 }
+
+/* =========================
+DESCRIPTION
+========================= */
 
 .empty-box p{
 
-    color:#94A3B8;
+    color:#E8CFCF;
 
-    font-size:16px;
+    font-size:15px;
 
-    line-height:1.7;
+    line-height:1.8;
 
-    margin-bottom:30px;
+    margin-bottom:34px;
 }
+
+/* =========================
+BUTTON
+========================= */
 
 .empty-box a{
 
-    background:#C8A96B;
+    background:#E0B15C;
 
-    color:#0F172A;
+    color:#4A001F;
 
     text-decoration:none;
 
-    padding:14px 28px;
+    padding:16px 32px;
 
-    border-radius:14px;
+    border-radius:18px;
 
     font-weight:bold;
 
     display:inline-block;
 
     transition:0.3s;
+
+    box-shadow:
+    0 10px 25px rgba(224,177,92,0.22);
 }
 
 .empty-box a:hover{
 
     transform:translateY(-3px);
 
-    background:#E0BC76;
+    background:#C99845;
+
+    box-shadow:
+    0 14px 30px rgba(224,177,92,0.28);
 }
 
-.icon{
+/* =========================
+ANIMATION
+========================= */
 
-    font-size:70px;
+@keyframes popupShow{
 
-    margin-bottom:20px;
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(25px)
+        scale(0.92);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0)
+        scale(1);
+    }
 }
 
 </style>

@@ -63,6 +63,14 @@ Route::post('/roommate/store', [DashboardController::class, 'store'])
 
     ->middleware(['auth']);
 
+Route::get('/roommate/edit/{id}', [DashboardController::class, 'edit'])
+
+    ->middleware(['auth']);
+
+Route::post('/roommate/update/{id}', [DashboardController::class, 'update'])
+
+    ->middleware(['auth']);
+
 /*
 |--------------------------------------------------------------------------
 | CHAT

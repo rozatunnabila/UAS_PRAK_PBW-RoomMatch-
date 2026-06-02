@@ -145,7 +145,7 @@ button:hover{
 
             <input
     type="text"
-    name="name"
+    name="judul"
     value="{{ Auth::user()->name }}"
     readonly
     style="

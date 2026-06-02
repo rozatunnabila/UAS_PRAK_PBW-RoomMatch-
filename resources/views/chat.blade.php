@@ -16,8 +16,13 @@
 }
 
 body{
-
-    background:#081120;
+background:
+linear-gradient(
+135deg,
+#4A001F 0%,
+#650024 45%,
+#2B0010 100%
+);
 
     font-family:Arial,sans-serif;
 
@@ -43,9 +48,11 @@ body{
 
     width:340px;
 
-    background:#0F172A;
+   backbackground:rgba(255,255,255,0.05);
 
-    border-right:1px solid #1E293B;
+    backdrop-filter:blur(18px);
+
+    border-right:1px solid rgba(255,215,160,0.12);
 
     display:flex;
     flex-direction:column;
@@ -60,7 +67,7 @@ body{
     font-size:32px;
     font-weight:bold;
 
-    border-bottom:1px solid #1E293B;
+   border-bottom:1px solid rgba(255,215,160,0.10);
 
     text-decoration:none;
 
@@ -73,12 +80,12 @@ body{
 
 .logo:hover{
 
-    background:#111C31;
+    background:rgba(255,255,255,0.04);
 }
 
 .logo span{
 
-    color:#C8A96B;
+    color:#F0C36D;
 }
 
 /* SEARCH */
@@ -95,9 +102,11 @@ body{
 
     gap:10px;
 
-    background:#162033;
+    background:rgba(255,255,255,0.08);
 
-    border:1px solid #23314F;
+    border:1px solid rgba(255,215,160,0.14);
+
+    backdrop-filter:blur(12px);
 
     padding:14px 16px;
 
@@ -125,9 +134,8 @@ body{
 
     margin:0 20px 18px;
 
-    background:#C8A96B;
-
-    color:#0F172A;
+    background:#E0B15C;
+    color:#4A001F;
 
     padding:12px 16px;
 
@@ -173,14 +181,14 @@ body{
 
 .chat-item:hover{
 
-    background:#162033;
+    background:rgba(255,255,255,0.06);
 }
 
 .chat-item.active{
 
-    background:#162033;
+    background:rgba(255,255,255,0.08);
 
-    border:1px solid #23314F;
+    border:1px solid rgba(255,215,160,0.18);
 }
 
 /* Avatar */
@@ -194,7 +202,7 @@ body{
 
     object-fit:cover;
 
-    border:2px solid #1E293B;
+    border:3px solid rgba(255,215,160,0.20);
 }
 
 /* Chat Info */
@@ -215,7 +223,7 @@ body{
 
 .chat-info p{
 
-    color:#94A3B8;
+    color:#E8CFCF;
 
     font-size:14px;
 }
@@ -248,7 +256,7 @@ body{
     align-items:center;
     gap:6px;
 
-    color:#C8A96B;
+    color:#E0B15C;
 
     text-decoration:none;
 
@@ -262,9 +270,11 @@ body{
 
     min-height:90px;
 
-    background:#0F172A;
+    background:rgba(255,255,255,0.05);
 
-    border-bottom:1px solid #1E293B;
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,215,160,0.10);
 
     padding:0 30px;
 
@@ -302,7 +312,7 @@ body{
 
 .chat-user p{
 
-    color:#94A3B8;
+    color:#E8CFCF;
 
     font-size:14px;
 }
@@ -310,10 +320,8 @@ body{
 /* Match Button */
 
 .match-btn{
-
-    background:#C8A96B;
-
-    color:#0F172A;
+    background:#E0B15C;
+    color:#4A001F;
 
     border:none;
 
@@ -332,9 +340,11 @@ body{
 
     margin:20px 30px 0;
 
-    background:#162033;
+   background:rgba(255,255,255,0.06);
 
-    border:1px solid #23314F;
+    border:1px solid rgba(255,215,160,0.12);
+
+    backdrop-filter:blur(12px);
 
     border-radius:22px;
 
@@ -360,7 +370,7 @@ body{
 
 .accept-btn{
 
-    background:#C8A96B;
+    background:#E0B15C;
 
     color:#0F172A;
 
@@ -379,7 +389,7 @@ body{
 
 .reject-btn{
 
-    background:#1E293B;
+    background:rgba(255,255,255,0.08);
 
     color:white;
 
@@ -427,7 +437,7 @@ body{
 
 .sender{
 
-    background:#C8A96B;
+    background:#E0B15C;
 
     color:#0F172A;
 
@@ -440,7 +450,11 @@ body{
 
 .receiver{
 
-    background:#162033;
+   background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,215,160,0.10);
 
     color:white;
 
@@ -451,9 +465,11 @@ body{
 
 .chat-input{
 
-    background:#0F172A;
+   background:rgba(255,255,255,0.05);
 
-    border-top:1px solid #1E293B;
+    backdrop-filter:blur(18px);
+
+    border-top:1px solid rgba(255,215,160,0.10);
 
     padding:20px;
 
@@ -469,7 +485,9 @@ body{
 
     flex:1;
 
-    background:#162033;
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,215,160,0.12);
 
     border:none;
 
@@ -495,7 +513,7 @@ body{
 
     border-radius:18px;
 
-    background:#C8A96B;
+    background:#E0B15C;
 
     color:#0F172A;
 
@@ -610,7 +628,7 @@ body{
 
 .popup-box p{
 
-    color:#94A3B8;
+    color:#E8CFCF;
 
     font-size:15px;
 
@@ -671,7 +689,7 @@ body{
 
     border-radius:18px;
 
-    background:#C8A96B;
+    background:#E0B15C;
 
     color:#0F172A;
 
@@ -716,9 +734,14 @@ body{
 
     width:430px;
 
-    background:#0F172A;
+    background:
+    linear-gradient(
+    180deg,
+    #5A0B2E 0%,
+    #3D0018 100%
+    );
 
-    border:1px solid #23314F;
+border:1px solid rgba(255,215,160,0.14);
 
     border-radius:32px;
 
@@ -759,7 +782,7 @@ body{
 
 .match-success-popup p{
 
-    color:#94A3B8;
+    color:#E8CFCF;
 
     line-height:1.7;
 
@@ -776,7 +799,7 @@ body{
 
     border-radius:18px;
 
-    background:#C8A96B;
+    background:#E0B15C;
 
     color:#0F172A;
 
@@ -844,9 +867,14 @@ body{
 
     width:430px;
 
-    background:#0F172A;
+    background:
+    linear-gradient(
+    180deg,
+    #5A0B2E 0%,
+    #3D0018 100%
+    );
 
-    border:1px solid #23314F;
+    border:1px solid rgba(255,215,160,0.14);
 
     border-radius:32px;
 
@@ -885,7 +913,7 @@ body{
 
 .pending-popup-box p{
 
-    color:#94A3B8;
+    color:#E8CFCF;
 
     line-height:1.7;
 
@@ -902,7 +930,7 @@ body{
 
     border-radius:18px;
 
-    background:#C8A96B;
+    background:#E0B15C;
 
     color:#0F172A;
 
@@ -985,7 +1013,7 @@ body{
 
     border-radius:16px;
 
-    background:#C8A96B;
+    background:#E0B15C;
 
     color:#0F172A;
 
@@ -1149,7 +1177,7 @@ body{
                 @if($unreadCount > 0)
 
                 <span style="
-                    background:#C8A96B;
+                    background:##E0B15C;
                     color:#0F172A;
 
                     min-width:22px;
