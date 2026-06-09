@@ -1,58 +1,317 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏠 RoomMatch
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Deskripsi Proyek
 
-## About Laravel
+RoomMatch adalah platform pencarian roommate berbasis web yang dirancang untuk membantu pengguna menemukan teman sekamar yang sesuai berdasarkan lokasi, kebiasaan hidup, pekerjaan, preferensi tempat tinggal, dan kebutuhan pribadi.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Mencari roommate yang cocok sering kali menjadi tantangan karena perbedaan gaya hidup, kebiasaan sehari-hari, maupun preferensi tempat tinggal. RoomMatch hadir sebagai solusi dengan menyediakan sistem pencarian, matching, dan komunikasi yang memungkinkan pengguna menemukan roommate yang lebih sesuai sebelum memutuskan untuk tinggal bersama.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi ini memungkinkan pengguna untuk membuat iklan pencarian roommate, mencari pengguna lain menggunakan sistem filter, mengirim permintaan match, berkomunikasi melalui fitur chat, serta mengelola profil dan preferensi mereka sendiri dalam satu platform terintegrasi.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+# Tujuan Pengembangan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+RoomMatch dikembangkan dengan tujuan:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Membantu pengguna menemukan roommate yang sesuai dengan preferensi mereka.
+* Mempermudah proses pencarian teman sekamar secara online.
+* Mengurangi risiko ketidakcocokan antar roommate.
+* Menyediakan media komunikasi sebelum pengguna memutuskan untuk tinggal bersama.
+* Memberikan pengalaman pencarian roommate yang lebih aman, cepat, dan efisien.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+# Fitur Utama
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 1. Roommate Advertisement
+
+Pengguna dapat membuat iklan pencarian roommate yang berisi informasi penting mengenai tempat tinggal dan preferensi roommate yang diinginkan.
+
+### Fitur
+
+* Membuat iklan roommate
+* Mengedit iklan roommate
+* Menghapus iklan roommate
+* Menambahkan foto
+* Menambahkan deskripsi tempat tinggal
+* Mengatur preferensi roommate
+
+---
+
+## 2. Matching System
+
+Sistem matching digunakan untuk memastikan bahwa kedua pengguna memiliki ketertarikan yang sama sebelum dapat melanjutkan komunikasi.
+
+### Status Match
+
+* Pending
+* Accepted
+* Rejected
+* Expired
+
+### Aturan Match
+
+* Setiap pengguna hanya dapat memiliki satu match aktif.
+* Match akan otomatis berakhir setelah 24 jam jika tidak direspon.
+* Pengguna yang telah memiliki match aktif tidak dapat mengirim atau menerima match baru.
+* Chat hanya dapat dilakukan setelah match diterima.
+
+### Manfaat
+
+* Mengurangi spam permintaan roommate.
+* Memastikan komunikasi hanya terjadi antar pengguna yang benar-benar tertarik.
+
+---
+
+## 3. Chat System
+
+Setelah match diterima, pengguna dapat berkomunikasi secara langsung melalui fitur chat.
+
+### Fitur Chat
+
+* Pengiriman pesan
+* Penerimaan pesan
+* Unread message notification
+* Notification badge
+* Active conversation
+* Contact sidebar
+
+### Tujuan
+
+* Mempermudah proses perkenalan.
+* Membantu pengguna mendiskusikan detail tempat tinggal.
+* Menjadi sarana komunikasi sebelum menjadi roommate.
+
+---
+
+## 4. Smart Filtering
+
+RoomMatch menyediakan fitur pencarian yang memungkinkan pengguna menemukan roommate yang sesuai dengan kebutuhan mereka.
+
+### Filter yang Tersedia
+
+* Lokasi
+* Pekerjaan
+* Kebiasaan hidup
+* Preferensi roommate
+
+### Tujuan
+
+* Mempercepat pencarian roommate.
+* Menampilkan hasil yang lebih relevan.
+* Mengurangi waktu pencarian.
+
+---
+
+## 5. Profile Management
+
+Setiap pengguna memiliki profil yang dapat disesuaikan sesuai kebutuhan.
+
+### Data Profil
+
+* Nama
+* Foto Profil
+* Lokasi
+* Pekerjaan
+* Deskripsi Diri
+* Kebiasaan Hidup
+* Preferensi Roommate
+
+### Fitur
+
+* Mengubah foto profil
+* Mengedit data pribadi
+* Mengatur preferensi roommate
+* Mengelola informasi akun
+
+---
+
+## 6. Notification System
+
+Aplikasi menyediakan berbagai notifikasi untuk membantu pengguna mengetahui aktivitas penting.
+
+### Jenis Notifikasi
+
+* Match baru
+* Match diterima
+* Match ditolak
+* Pesan baru
+* Pesan belum dibaca
+
+---
+# Struktur Direktori
 
 ```bash
-composer require laravel/boost --dev
+app/
+├── Http/
+│   └── Controllers/
+│       ├── DashboardController.php
+│       ├── ChatController.php
+│       └── ProfileController.php
+│
+├── Models/
+│   ├── User.php
+│   ├── Iklan.php
+│   ├── Chat.php
+│   └── RoomMatch.php
+│
+resources/
+├── views/
+│   ├── dashboard.blade.php
+│   ├── chat.blade.php
+│   ├── create-roommate.blade.php
+│   ├── edit-roommate.blade.php
+│   ├── profile/
+│   └── auth/
+│
+routes/
+└── web.php
 
-php artisan boost:install
+database/
+├── migrations/
+└── seeders/
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+# Skema Database
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Tabel Users
 
-## Code of Conduct
+| Field      | Type      |
+| ---------- | --------- |
+| id         | bigint    |
+| name       | varchar   |
+| email      | varchar   |
+| password   | varchar   |
+| pekerjaan  | varchar   |
+| lokasi     | varchar   |
+| kebiasaan  | text      |
+| created_at | timestamp |
+| updated_at | timestamp |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Tabel Roommate Posts
 
-## Security Vulnerabilities
+| Field               | Type        |
+| ------------------- | ----------- |
+| id                  | bigint      |
+| user_id             | foreign key |
+| judul               | varchar     |
+| deskripsi           | text        |
+| lokasi              | varchar     |
+| preferensi_roommate | text        |
+| foto                | varchar     |
+| created_at          | timestamp   |
+| updated_at          | timestamp   |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Tabel Matches
 
-## License
+| Field       | Type        |
+| ----------- | ----------- |
+| id          | bigint      |
+| sender_id   | foreign key |
+| receiver_id | foreign key |
+| status      | enum        |
+| expired_at  | timestamp   |
+| created_at  | timestamp   |
+| updated_at  | timestamp   |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Tabel Chats
+
+| Field       | Type        |
+| ----------- | ----------- |
+| id          | bigint      |
+| sender_id   | foreign key |
+| receiver_id | foreign key |
+| message     | text        |
+| is_read     | boolean     |
+| created_at  | timestamp   |
+| updated_at  | timestamp   |
+
+---
+
+# Alur Penggunaan Aplikasi
+
+### 1. Registrasi dan Login
+
+Pengguna membuat akun dan masuk ke dalam sistem.
+
+↓
+
+### 2. Melengkapi Profil
+
+Pengguna mengisi informasi pribadi dan preferensi roommate.
+
+↓
+
+### 3. Membuat Iklan Roommate
+
+Pengguna membuat postingan pencarian roommate.
+
+↓
+
+### 4. Mencari Roommate
+
+Pengguna mencari roommate menggunakan fitur filter.
+
+↓
+
+### 5. Mengirim Permintaan Match
+
+Pengguna mengirim match kepada roommate yang diminati.
+
+↓
+
+### 6. Proses Persetujuan Match
+
+Penerima dapat menerima atau menolak permintaan tersebut.
+
+↓
+
+### 7. Memulai Chat
+
+Apabila match diterima, kedua pengguna dapat mulai berkomunikasi.
+
+↓
+
+### 8. Menjadi Roommate
+
+Pengguna dapat melanjutkan proses pencarian tempat tinggal bersama setelah menemukan kecocokan.
+
+---
+
+# 🛠 Teknologi yang Digunakan
+
+## Backend
+
+* Laravel 13
+* PHP 8.3
+
+## Frontend
+
+* Blade Template Engine
+* HTML5
+* CSS3
+* JavaScript
+
+## Database
+
+* MySQL
+
+## Authentication
+
+* Laravel Breeze
+
+## Development Tools
+
+* Composer
+* Vite
+* Laragon / XAMPP
+
+---
+
+# Author
+
+RoomMatch dikembangkan sebagai platform pencarian roommate yang menggabungkan sistem matching, komunikasi, dan manajemen profil dalam satu aplikasi. Proyek ini berfokus pada peningkatan pengalaman pengguna dalam menemukan teman sekamar yang sesuai melalui proses yang lebih terstruktur, aman, dan efisien.
+Dibuat oleh Kelompok 8 sebagai proyek akhir Mata Kuliah Praktikum Pemrograman Berbasis Web. 
